@@ -1,0 +1,30 @@
+2013-11-28 13:38:39,332 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: xadrezGame:xadrezGame:0.0.1-SNAPSHOT @ D:\GitHub\Projetos\Xadrez\xadrezGame\pom.xml.
+2013-11-28 13:38:41,198 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /xadrezGame/src/main/java
+2013-11-28 13:38:41,200 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /xadrezGame/src/main/resources
+2013-11-28 13:38:41,201 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /xadrezGame/src/test/java
+2013-11-28 13:38:41,201 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /xadrezGame/src/test/resources
+2013-11-28 13:38:41,566 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: xadrezGame:xadrezGame:0.0.1-SNAPSHOT @ D:\GitHub\Projetos\Xadrez\xadrezGame\pom.xml.
+2013-11-28 13:38:42,876 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: xadrezGame:xadrezGame:0.0.1-SNAPSHOT @ D:\GitHub\Projetos\Xadrez\xadrezGame\pom.xml.
+2013-11-28 13:38:43,002 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:38:43,009 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:38:43,014 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:38:43,016 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:40:36,244 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: xadrez:xadrez:0.0.1-SNAPSHOT @ D:\GitHub\Projetos\Xadrez\xadrez\pom.xml.
+2013-11-28 13:40:37,380 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /xadrez/src/main/java
+2013-11-28 13:40:37,382 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /xadrez/src/main/resources
+2013-11-28 13:40:37,383 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /xadrez/src/test/java
+2013-11-28 13:40:37,383 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /xadrez/src/test/resources
+2013-11-28 13:40:37,745 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: xadrez:xadrez:0.0.1-SNAPSHOT @ D:\GitHub\Projetos\Xadrez\xadrez\pom.xml.
+2013-11-28 13:40:38,464 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:40:38,470 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:40:38,474 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:40:38,476 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:43:09,398 [Worker-6] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: xadrez:xadrez:0.0.1-SNAPSHOT @ D:\GitHub\Projetos\Xadrez\xadrez\pom.xml.
+2013-11-28 13:43:09,531 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:43:09,534 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:43:09,537 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:43:09,538 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:43:10,744 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:43:10,752 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2013-11-28 13:43:10,755 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2013-11-28 13:43:10,756 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
