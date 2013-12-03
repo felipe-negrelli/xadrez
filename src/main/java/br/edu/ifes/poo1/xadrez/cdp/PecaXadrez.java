@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PecaXadrez {
 
-	public boolean getBranco();
+	public Cor getCor();
 	
 	public boolean getMoveu();
 	
@@ -12,6 +12,6 @@ public interface PecaXadrez {
 	
 	public List<CasaTabuleiro> getMovimentosPossiveis();
 	
-	public void moverPeca(CasaTabuleiro casa_tabuleiro);	
+	public void moverPeca(CasaTabuleiro casaTabuleiro);	
 	
 }

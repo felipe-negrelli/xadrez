@@ -4,14 +4,14 @@ import java.util.List;
 
 public abstract class Peca implements PecaXadrez {
 	
-	private boolean ehBranco;
+	private Cor cor;
 	private int quantMovimentos;
 	
-	public boolean getBranco()
+	public Cor getCor()
 	{
-		if(ehBranco)
-			return true;
-		return false;
+		if(this.cor == Cor.Branco)
+			return Cor.Branco;
+		return Cor.Preto;
 	}
 	
 	public boolean getMoveu()
