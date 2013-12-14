@@ -3,18 +3,22 @@ package br.edu.ifes.poo1.xadrez.cdp;
 import java.util.List;
 
 public class Bispo  extends Peca {
+	
+	public Bispo(Cor cor)
+	{
+		this.setCor(cor);
+	}
 
 	@Override
-	public List<CasaTabuleiro> getMovimentosPossiveis() {
+	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void moverPeca(CasaTabuleiro casa_tabuleiro) {
-		// TODO Auto-generated method stub
-		
+	
+	public String toString()
+	{
+		if(this.getCor() == Cor.Branco)
+			return "b";
+		return "B";
 	}
-
-
 }

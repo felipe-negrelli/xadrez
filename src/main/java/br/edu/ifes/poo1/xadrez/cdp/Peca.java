@@ -6,12 +6,35 @@ public abstract class Peca implements PecaXadrez {
 	
 	private Cor cor;
 	private int quantMovimentos;
+	private TipoPeca tipoPeca;
+	private Posicao posicao;
 	
+	public Posicao getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Posicao posicao) {
+		this.posicao = posicao;
+	}
+
+	public TipoPeca getTipoPeca() {
+		return tipoPeca;
+	}
+
+	public void setTipoPeca(TipoPeca tipoPeca) {
+		this.tipoPeca = tipoPeca;
+	}
+
 	public Cor getCor()
 	{
 		if(this.cor == Cor.Branco)
 			return Cor.Branco;
 		return Cor.Preto;
+	}
+	
+	public void setCor(Cor cor)
+	{
+		this.cor = cor;
 	}
 	
 	public boolean getMoveu()
@@ -26,8 +49,6 @@ public abstract class Peca implements PecaXadrez {
 		return this.quantMovimentos;
 	}
 	
-	public abstract List<CasaTabuleiro> getMovimentosPossiveis();
-	
-	public abstract void moverPeca(CasaTabuleiro casa_tabuleiro);
+	public abstract List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);
 
 }

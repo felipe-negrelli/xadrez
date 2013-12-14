@@ -1,0 +1,29 @@
+    _::_           
+  _/____\_        ()       
+  \      /      <~~~~>
+   \____/        \__/         <>_
+   (____)       (____)      (\)  )                        __/"""\
+    |  |         |  |        \__/      WWWWWW            ]___ 0  }
+    |__|         |  |       (____)      |  |       __        /   }
+   /    \        |__|        |  |       |  |      (  )     /~    }
+  (______)      /____\       |__|       |__|       ||      \____/
+ (________)    (______)     /____\     /____\     /__\     /____\
+ /________\   (________)   (______)   (______)   (____)   (______)
+    King        Queen       Bishop      Rook      Pawn     kNight
+
+
+
+http://www.chessvariants.org/d.pieces/ascii.html
+
+------------------------------------------------------------------
+
+Menu:
+ - 1 - Digite 1 para jogar contra o computador
+ - 2 - Digite 2 para modo de 2 jogadores
+ - 3 - Iniciar Jogo
+ - 4 - Sair do jogo
+
+
+Escrever ao lado do menu:
+ - O desenho e o nome da pedra que foi movida
+ - 

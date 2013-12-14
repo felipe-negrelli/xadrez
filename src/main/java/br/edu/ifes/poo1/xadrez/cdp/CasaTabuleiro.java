@@ -1,14 +1,13 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
-public class CasaTabuleiro {
+public class CasaTabuleiro{
 	
-	private int coluna, linha;
+	private Posicao posicao;
 	private PecaXadrez pecaAtual;
 	
-	public CasaTabuleiro(int coluna, int linha)
+	public CasaTabuleiro(Posicao posicao)
 	{
-		this.coluna = coluna;
-		this.linha = linha;
+		this.posicao = posicao;
 	}			
 	
 	public void setPeca(PecaXadrez peca)
@@ -19,6 +18,11 @@ public class CasaTabuleiro {
 	public PecaXadrez getPeca()
 	{
 		return this.pecaAtual;
+	}
+	
+	public void limpaPeca()
+	{
+		this.pecaAtual = null;
 	}
 	
 	public boolean getOcupada()

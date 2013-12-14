@@ -10,8 +10,6 @@ public interface PecaXadrez {
 	
 	public int getQuantMovimentos();
 	
-	public List<CasaTabuleiro> getMovimentosPossiveis();
-	
-	public void moverPeca(CasaTabuleiro casaTabuleiro);	
+	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);
 	
 }
