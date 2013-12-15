@@ -2,17 +2,21 @@ package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.util.List;
 
+import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
+
 public class Partida {
 	
+	ControladorXadrez controladorXadrez;
 	Tabuleiro tabuleiro = new Tabuleiro();
 	EstadoPartida estadoPartida;
 	Jogador jogadorBranco;
 	Jogador jogadorPreto ;
 	Cor vezJogada = Cor.Branco;
 	
-	public Partida()
+	public Partida(ControladorXadrez controlador)
 	{
-		estadoPartida = EstadoPartida.Normal;
+		this.controladorXadrez = controlador;
+		this.estadoPartida = EstadoPartida.Normal;
 	}
 	
 	public Jogador getJogadorBranco() {
@@ -69,6 +73,10 @@ public class Partida {
 		{
 			moverPeca(posicaoOrigem, posicaoDestino);			
 		}
+		else
+		{
+			this.controladorXadrez.setErroLogico();
+		}
 	}
 	
 	public void moverPeca(Posicao posicaoOrigem, Posicao posicaoDestino)
@@ -78,6 +86,7 @@ public class Partida {
 		
 		//seta variavel peca no lugar de origem com a nova
 		this.tabuleiro.getCasa(posicaoDestino).setPeca(pecaOrigem);
+		pecaOrigem.incrementaMovimento();
 		
 		//limpa peca
 		this.tabuleiro.getCasa(posicaoOrigem).limpaPeca();

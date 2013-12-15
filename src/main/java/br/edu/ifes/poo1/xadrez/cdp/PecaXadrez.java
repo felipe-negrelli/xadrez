@@ -14,6 +14,8 @@ public interface PecaXadrez {
 	
 	public int getQuantMovimentos();
 	
+	public void incrementaMovimento();
+	
 	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);
 	
 }

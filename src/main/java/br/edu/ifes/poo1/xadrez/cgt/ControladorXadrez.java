@@ -14,7 +14,7 @@ import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
 
 public class ControladorXadrez {
 	
-	Partida partida = new Partida();	
+	Partida partida = new Partida(this);	
 	List<DadosPartida> dadosPartidas = new ArrayList<DadosPartida>();
 	ControladorJogo controladorJogo;
 	
@@ -84,6 +84,11 @@ public class ControladorXadrez {
 			
 		}
 		
+	}
+	
+	public void setErroLogico()
+	{
+		controladorJogo.exibirErroLogico();
 	}
 	
 

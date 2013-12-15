@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class Peca implements PecaXadrez {
 	
 	private Cor cor;
-	private int quantMovimentos;
+	private int quantMovimentos = 0;
 	private TipoPeca tipoPeca;
 	private Posicao posicao;
 	
@@ -47,6 +47,11 @@ public abstract class Peca implements PecaXadrez {
 	public int getQuantMovimentos()
 	{
 		return this.quantMovimentos;
+	}
+	
+	public void incrementaMovimento()
+	{
+		this.quantMovimentos++;
 	}
 	
 	public abstract List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);

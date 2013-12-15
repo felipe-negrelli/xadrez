@@ -107,12 +107,17 @@ public class ControladorJogo {
 	
 	public void exibeTabuleiro()
 	{	
-		telaTexto.imprimeTabuleiro(controladorXadrez.getTabuleiro());	
+		telaTexto.imprimeTabuleiro(controladorXadrez.getTabuleiro());
 	}
 	
 	public void exibirErroJogada(String jogada)
 	{
 		telaTexto.exibirErroJogada(jogada);
+	}
+	
+	public void exibirErroLogico()
+	{
+		telaTexto.exibirErroLogico();
 	}
 	
 	public void exibeDadosPartida()

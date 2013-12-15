@@ -21,20 +21,42 @@ public class Peao extends Peca{
 		int colunaAtual = this.getPosicao().getColuna();
 		List<Posicao> destinosPossiveis = new ArrayList<Posicao>();
 		
-		//testa se a posicao a frente esta vazia
-		Posicao posicaoFrente = new Posicao(linhaAtual+1, colunaAtual);
-		if(tabuleiro.getCasa(posicaoFrente).getOcupada() == false)
-		{
-			//adiciona a lista de destinos
-			destinosPossiveis.add(posicaoFrente);
-		}
 		
-		//teste se a posicao linha+1 e linha+2 estão vazias
-		Posicao posicao2Frente = new Posicao(linhaAtual+2, colunaAtual);
-		if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false))
+		if(this.getCor() == Cor.Branco)
 		{
-			//adiciona linha+2 
-			destinosPossiveis.add(posicao2Frente);
+			//testa se a posicao a frente esta vazia
+			Posicao posicaoFrente = new Posicao(linhaAtual+1, colunaAtual);
+			if(tabuleiro.getCasa(posicaoFrente).getOcupada() == false)
+			{
+				//adiciona a lista de destinos
+				destinosPossiveis.add(posicaoFrente);
+			}
+			
+			//teste se a posicao linha+1 e linha+2 estão vazias
+			Posicao posicao2Frente = new Posicao(linhaAtual+2, colunaAtual);
+			if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false) && (!this.getMoveu()))
+			{
+				//adiciona linha+2 
+				destinosPossiveis.add(posicao2Frente);
+			}
+		}
+		else
+		{
+			//testa se a posicao a frente esta vazia
+			Posicao posicaoFrente = new Posicao(linhaAtual-1, colunaAtual);
+			if(tabuleiro.getCasa(posicaoFrente).getOcupada() == false)
+			{
+				//adiciona a lista de destinos
+				destinosPossiveis.add(posicaoFrente);
+			}
+			
+			//teste se a posicao linha+1 e linha+2 estão vazias
+			Posicao posicao2Frente = new Posicao(linhaAtual-2, colunaAtual);
+			if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false) && (!this.getMoveu()))
+			{
+				//adiciona linha+2 
+				destinosPossiveis.add(posicao2Frente);
+			}
 		}
 		
 		

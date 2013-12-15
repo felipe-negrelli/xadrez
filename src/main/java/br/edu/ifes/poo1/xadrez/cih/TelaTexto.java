@@ -95,7 +95,7 @@ public class TelaTexto {
 		while(!resultadoValido)
 		{
 			String mensagem = "\n\nDigite o nome do Jogador Branco:\n=>";
-			System.out.println(mensagem);
+			System.out.print(mensagem);
 			Scanner scanner = new Scanner(new InputStreamReader(System.in));
 			
 			resultado = scanner.nextLine();
@@ -159,9 +159,11 @@ public class TelaTexto {
 	
 	public void exibirErroJogada(String jogada)
 	{
-		boolean resultadoValido = false;
-		String resultado = "";
-		
 		System.out.println("'"+jogada+"'"+" não é uma jogada válida.\n\n");
+	}
+	
+	public void exibirErroLogico()
+	{
+		System.out.println("'A jogada não é possível. Digite uma nova jogada.\n\n");
 	}
 }
