@@ -2,10 +2,12 @@ package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.util.List;
 
-public class Bispo  extends Peca {
+public class Bispo extends Peca {
 	
 	public Bispo(Cor cor)
 	{
+		super();
+		this.setTipoPeca(TipoPeca.Bispo);
 		this.setCor(cor);
 	}
 

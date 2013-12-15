@@ -6,6 +6,8 @@ public class Rainha  extends Peca{
 	
 	public Rainha(Cor cor)
 	{
+		super();
+		this.setTipoPeca(TipoPeca.Rainha);
 		this.setCor(cor);
 	}
 

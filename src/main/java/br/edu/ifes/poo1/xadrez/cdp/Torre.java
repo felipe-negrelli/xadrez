@@ -6,6 +6,8 @@ public class Torre extends Peca {
 	
 	public Torre(Cor cor)
 	{
+		super();
+		this.setTipoPeca(TipoPeca.Torre);
 		this.setCor(cor);
 	}
 

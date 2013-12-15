@@ -6,6 +6,10 @@ public interface PecaXadrez {
 
 	public Cor getCor();
 	
+	public Posicao getPosicao();
+
+	public void setPosicao(Posicao posicao);
+	
 	public boolean getMoveu();
 	
 	public int getQuantMovimentos();

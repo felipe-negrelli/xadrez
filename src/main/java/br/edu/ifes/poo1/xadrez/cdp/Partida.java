@@ -1,5 +1,7 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
+import java.util.List;
+
 public class Partida {
 	
 	Tabuleiro tabuleiro = new Tabuleiro();
@@ -60,8 +62,10 @@ public class Partida {
 	
 	public void processarMovimento(Posicao posicaoOrigem, Posicao posicaoDestino)
 	{
-		//testa se a posicao destino esta entre as possiveis
-		if(this.getTabuleiro().getCasa(posicaoOrigem).getPeca().getMovimentosPossiveis(this.tabuleiro).contains(posicaoDestino))
+		//testa se a posicao destino esta entre as possiveis		
+		List<Posicao> posicoesPossiveis = this.getTabuleiro().getCasa(posicaoOrigem).getPeca().getMovimentosPossiveis(this.tabuleiro);
+		
+		if(existe(posicoesPossiveis, posicaoDestino))
 		{
 			moverPeca(posicaoOrigem, posicaoDestino);			
 		}
@@ -76,14 +80,33 @@ public class Partida {
 		this.tabuleiro.getCasa(posicaoDestino).setPeca(pecaOrigem);
 		
 		//limpa peca
-		this.tabuleiro.getCasa(posicaoDestino).setPeca(null);
+		this.tabuleiro.getCasa(posicaoOrigem).limpaPeca();
 		
 		alteraVez();
 	}
 	
+	public boolean existe(List<Posicao> posicoes, Posicao posicaoDestino)
+	{
+		boolean achou = false;
+		for(int contador=0;contador<posicoes.size();contador++)
+		{
+			if(posicoes.get(contador).getLinha()==posicaoDestino.getLinha() && (posicoes.get(contador).getColuna()==posicaoDestino.getColuna()))
+			{
+				achou = true;
+			}
+		}
+		return achou;
+	}
+	
 	public void alteraVez()
 	{
-		
+		if(getJogadorDaVez().getCor() == Cor.Branco)
+		{
+			setVezJogada(Cor.Preto);
+		}
+		else
+		{
+			setVezJogada(Cor.Branco);
+		}
 	}
-
 }

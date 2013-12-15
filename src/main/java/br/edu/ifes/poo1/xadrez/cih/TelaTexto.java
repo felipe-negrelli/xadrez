@@ -31,9 +31,9 @@ public class TelaTexto {
 		tabuleiroDesenho += "    1  2  3  4  5  6  7  8\n";
 		tabuleiroDesenho += "   +----------------------+\n";
 		
-		for(int contadorLinha=1;contadorLinha<9;contadorLinha++){
+		for(int contadorLinha=8;contadorLinha>0;contadorLinha--){
 			
-			tabuleiroDesenho += " "+(9-contadorLinha)+" |";
+			tabuleiroDesenho += " "+(contadorLinha)+" |";
 			
 			
 			for(int contadorColuna=1;contadorColuna<9;contadorColuna++)
@@ -57,7 +57,7 @@ public class TelaTexto {
 				}				
 			}
 			
-			tabuleiroDesenho += "| "+(9-contadorLinha)+"\n";		
+			tabuleiroDesenho += "| "+(contadorLinha)+"\n";		
 		}
 
 		tabuleiroDesenho += "   +----------------------+\n";

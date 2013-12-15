@@ -6,6 +6,8 @@ public class Cavalo  extends Peca{
 	
 	public Cavalo(Cor cor)
 	{
+		super();
+		this.setTipoPeca(TipoPeca.Cavalo);
 		this.setCor(cor);
 	}
 

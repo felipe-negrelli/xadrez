@@ -9,6 +9,8 @@ public class Peao extends Peca{
 	
 	public Peao(Cor cor)
 	{
+		super();
+		this.setTipoPeca(TipoPeca.Peao);
 		this.setCor(cor);
 	}
 
@@ -42,6 +44,8 @@ public class Peao extends Peca{
 		return destinosPossiveis;
 		
 	}
+	
+	
 	
 	public String toString()
 	{

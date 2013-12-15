@@ -6,6 +6,8 @@ public class Rei  extends Peca{
 	
 	public Rei(Cor cor)
 	{
+		super();
+		this.setTipoPeca(TipoPeca.Rei);
 		this.setCor(cor);
 	}
 

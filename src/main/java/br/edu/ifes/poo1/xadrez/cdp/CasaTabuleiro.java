@@ -12,7 +12,8 @@ public class CasaTabuleiro{
 	
 	public void setPeca(PecaXadrez peca)
 	{
-		this.pecaAtual = peca;
+		this.pecaAtual = peca;		
+		this.pecaAtual.setPosicao(this.posicao);
 	}
 	
 	public PecaXadrez getPeca()

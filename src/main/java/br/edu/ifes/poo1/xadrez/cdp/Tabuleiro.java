@@ -61,11 +61,11 @@ public class Tabuleiro {
 	{
 		CasaTabuleiro casa;
 		
-		casa = casas[posicao.getLinha()-1][posicao.getColuna()-1];	
+		casa = casas[8-posicao.getLinha()][posicao.getColuna()-1];	
 		
 		return casa;	
 	}
-	
+	/*
 	public CasaTabuleiro getCasa(int linha, int coluna)
 	{
 		CasaTabuleiro casa;
@@ -74,4 +74,5 @@ public class Tabuleiro {
 		
 		return casa;	
 	}
+	*/
 }
