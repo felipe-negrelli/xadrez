@@ -21,11 +21,11 @@ public class Peao extends Peca{
 		int colunaAtual = this.getPosicao().getColuna();
 		List<Posicao> destinosPossiveis = new ArrayList<Posicao>();
 		
-		
 		if(this.getCor() == Cor.Branco)
 		{
 			//testa se a posicao a frente esta vazia
-			Posicao posicaoFrente = new Posicao(linhaAtual+1, colunaAtual);
+			Posicao posicaoFrente = new Posicao(linhaAtual+1, colunaAtual);	
+			
 			if(tabuleiro.getCasa(posicaoFrente).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -34,16 +34,39 @@ public class Peao extends Peca{
 			
 			//teste se a posicao linha+1 e linha+2 estão vazias
 			Posicao posicao2Frente = new Posicao(linhaAtual+2, colunaAtual);
+			
 			if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false) && (!this.getMoveu()))
 			{
 				//adiciona linha+2 
 				destinosPossiveis.add(posicao2Frente);
+			}	
+			
+			
+			if(this.getPosicao().getColuna() > 1)
+			{
+				
 			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 		else
 		{
 			//testa se a posicao a frente esta vazia
-			Posicao posicaoFrente = new Posicao(linhaAtual-1, colunaAtual);
+			Posicao posicaoFrente = new Posicao(linhaAtual-1, colunaAtual);	
+			
 			if(tabuleiro.getCasa(posicaoFrente).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -52,16 +75,26 @@ public class Peao extends Peca{
 			
 			//teste se a posicao linha+1 e linha+2 estão vazias
 			Posicao posicao2Frente = new Posicao(linhaAtual-2, colunaAtual);
+			
 			if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false) && (!this.getMoveu()))
 			{
 				//adiciona linha+2 
 				destinosPossiveis.add(posicao2Frente);
-			}
+			}	
 		}
 		
 		
 		
-		////////////////////////////////////implementar o resto
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		return destinosPossiveis;
 		
