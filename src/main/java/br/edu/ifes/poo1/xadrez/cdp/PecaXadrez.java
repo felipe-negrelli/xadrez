@@ -10,6 +10,10 @@ public interface PecaXadrez {
 
 	public void setPosicao(Posicao posicao);
 	
+	public TipoPeca getTipoPeca();
+	
+	public void setTipoPeca(TipoPeca tipoPeca);
+	
 	public boolean getMoveu();
 	
 	public int getQuantMovimentos();

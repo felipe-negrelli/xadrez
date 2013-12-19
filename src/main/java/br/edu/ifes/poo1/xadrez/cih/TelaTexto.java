@@ -3,6 +3,7 @@ package br.edu.ifes.poo1.xadrez.cih;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import br.edu.ifes.poo1.xadrez.cdp.Jogador;
 import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
 
@@ -154,7 +155,7 @@ public class TelaTexto {
 			}
 		}
 		
-		return resultado;	
+		return resultado;
 	}
 	
 	public void exibirErroJogada(String jogada)
@@ -165,5 +166,10 @@ public class TelaTexto {
 	public void exibirErroLogico()
 	{
 		System.out.println("'A jogada não é possível. Digite uma nova jogada.\n\n");
+	}
+	
+	public void exibirPontos(Jogador jogador)
+	{
+		
 	}
 }

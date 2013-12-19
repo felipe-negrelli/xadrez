@@ -76,7 +76,15 @@ public class ControladorJogo {
 	
 	public void processaJogada(String jogada)
 	{
-		controladorXadrez.processarJogada(jogada);
+		if(jogada == "pontos")
+		{
+			int pontos = this.controladorXadrez.getPontosJogadorAtual();
+		}
+		else
+		{
+			controladorXadrez.processarJogada(jogada);
+		}
+		
 	}
 	
 	public boolean isComandoValido(String jogada)
@@ -124,6 +132,9 @@ public class ControladorJogo {
 	{
 		//implementar
 	}
+	
+	
+	
 	
 	
 }

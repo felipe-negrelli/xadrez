@@ -14,13 +14,13 @@ public class Peao extends Peca{
 		this.setCor(cor);
 	}
 
-	@Override
 	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro) {
 		
 		int linhaAtual = this.getPosicao().getLinha();
 		int colunaAtual = this.getPosicao().getColuna();
 		List<Posicao> destinosPossiveis = new ArrayList<Posicao>();
 		
+		//testa se a peca eh branca
 		if(this.getCor() == Cor.Branco)
 		{
 			//testa se a posicao a frente esta vazia
@@ -35,33 +35,43 @@ public class Peao extends Peca{
 			//teste se a posicao linha+1 e linha+2 estão vazias
 			Posicao posicao2Frente = new Posicao(linhaAtual+2, colunaAtual);
 			
-			if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false) && (!this.getMoveu()))
+			if((!this.getMoveu()) && (tabuleiro.getCasa(posicaoFrente).getOcupada() == false) && (tabuleiro.getCasa(posicao2Frente).getOcupada() == false))
 			{
 				//adiciona linha+2 
 				destinosPossiveis.add(posicao2Frente);
 			}	
 			
-			
+			//testa se pode comer a esquerda
 			if(this.getPosicao().getColuna() > 1)
 			{
+				Posicao posicaoComerEsquerda = new Posicao(linhaAtual+1, colunaAtual-1);	
 				
+				if(tabuleiro.getCasa(posicaoComerEsquerda).getOcupada() == true)
+				{
+					if(tabuleiro.getCasa(posicaoComerEsquerda).getCor() == Cor.Preto)
+					{
+						//adiciona a lista de destinos
+						destinosPossiveis.add(posicaoComerEsquerda);
+					}
+				}
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			//testa se pode comer a direita
+			if(this.getPosicao().getColuna() < 8)
+			{
+				Posicao posicaoComerDireita = new Posicao(linhaAtual+1, colunaAtual+1);	
+				
+				if(tabuleiro.getCasa(posicaoComerDireita).getOcupada() == true)
+				{
+					if(tabuleiro.getCasa(posicaoComerDireita).getCor() == Cor.Preto)
+					{
+						//adiciona a lista de destinos
+						destinosPossiveis.add(posicaoComerDireita);
+					}
+				}
+			}
 		}
+		//testa se as peca for preta 
 		else
 		{
 			//testa se a posicao a frente esta vazia
@@ -80,21 +90,38 @@ public class Peao extends Peca{
 			{
 				//adiciona linha+2 
 				destinosPossiveis.add(posicao2Frente);
-			}	
+			}
+			
+			//testa se pode comer a esquerda
+			if(this.getPosicao().getColuna() < 8)
+			{
+				Posicao posicaoComerEsquerda = new Posicao(linhaAtual-1, colunaAtual+1);	
+				
+				if(tabuleiro.getCasa(posicaoComerEsquerda).getOcupada() == true)
+				{
+					if(tabuleiro.getCasa(posicaoComerEsquerda).getCor() == Cor.Preto)
+					{
+						//adiciona a lista de destinos
+						destinosPossiveis.add(posicaoComerEsquerda);
+					}
+				}
+			}
+			
+			//testa se pode comer a direita
+			if(this.getPosicao().getColuna() > 1)
+			{
+				Posicao posicaoComerDireita = new Posicao(linhaAtual-1, colunaAtual-1);	
+				
+				if(tabuleiro.getCasa(posicaoComerDireita).getOcupada() == true)
+				{
+					if(tabuleiro.getCasa(posicaoComerDireita).getCor() == Cor.Preto)
+					{
+						//adiciona a lista de destinos
+						destinosPossiveis.add(posicaoComerDireita);
+					}
+				}
+			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		return destinosPossiveis;
 		

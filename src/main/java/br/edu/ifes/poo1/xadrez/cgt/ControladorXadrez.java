@@ -47,7 +47,7 @@ public class ControladorXadrez {
 	}
 	
 	public void processarJogada(String jogada)
-	{
+	{		
 		if(jogada.length() == 4)
 		{
 			String teste = jogada.substring(0,1);
@@ -84,6 +84,11 @@ public class ControladorXadrez {
 			
 		}
 		
+	}
+	
+	public int getPontosJogadorAtual()
+	{
+		return this.partida.getPontosJogadorAtual();
 	}
 	
 	public void setErroLogico()

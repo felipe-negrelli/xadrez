@@ -64,6 +64,13 @@ public class Partida {
 		this.jogadorBranco.setNome(nome);
 	}
 	
+	public int getPontosJogadorAtual()
+	{
+		if(this.vezJogada == Cor.Branco)
+			return this.getJogadorBranco().getPontos();
+		return this.getJogadorPreto().getPontos();
+	}
+	
 	public void processarMovimento(Posicao posicaoOrigem, Posicao posicaoDestino)
 	{
 		//testa se a posicao destino esta entre as possiveis		
@@ -88,7 +95,12 @@ public class Partida {
 		this.tabuleiro.getCasa(posicaoDestino).setPeca(pecaOrigem);
 		pecaOrigem.incrementaMovimento();
 		
-		//limpa peca
+		if(this.tabuleiro.getCasa(posicaoDestino).getOcupada())
+		{
+			adicionaPontos(this.tabuleiro.getCasa(posicaoDestino).getPeca());
+		}
+		
+		//limpa peca na origem
 		this.tabuleiro.getCasa(posicaoOrigem).limpaPeca();
 		
 		alteraVez();
@@ -116,6 +128,53 @@ public class Partida {
 		else
 		{
 			setVezJogada(Cor.Branco);
+		}
+	}
+	
+	@SuppressWarnings("incomplete-switch")
+	private void adicionaPontos(PecaXadrez pecaComida)
+	{
+		if(vezJogada == Cor.Branco)
+		{
+			switch(pecaComida.getTipoPeca())
+			{
+				case Peao:
+					jogadorBranco.adicionaPontos(1);
+					break;
+				case Bispo:
+					jogadorBranco.adicionaPontos(3);
+					break;
+				case Cavalo:
+					jogadorBranco.adicionaPontos(3);
+					break;
+				case Torre:
+					jogadorBranco.adicionaPontos(5);
+					break;
+				case Rainha:
+					jogadorBranco.adicionaPontos(9);
+					break;
+			}
+		}
+		else
+		{
+			switch(pecaComida.getTipoPeca())
+			{
+				case Peao:
+					jogadorPreto.adicionaPontos(1);
+					break;
+				case Bispo:
+					jogadorPreto.adicionaPontos(3);
+					break;
+				case Cavalo:
+					jogadorPreto.adicionaPontos(3);
+					break;
+				case Torre:
+					jogadorPreto.adicionaPontos(5);
+					break;
+				case Rainha:
+					jogadorPreto.adicionaPontos(9);
+					break;
+			}
 		}
 	}
 }
