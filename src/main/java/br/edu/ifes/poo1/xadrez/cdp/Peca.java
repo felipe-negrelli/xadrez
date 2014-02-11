@@ -1,8 +1,9 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Peca implements PecaXadrez {
+public abstract class Peca implements PecaXadrez,Serializable {
 	
 	private Cor cor;
 	private int quantMovimentos = 0;

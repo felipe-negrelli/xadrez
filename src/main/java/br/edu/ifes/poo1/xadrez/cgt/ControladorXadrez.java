@@ -1,5 +1,6 @@
 package br.edu.ifes.poo1.xadrez.cgt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import br.edu.ifes.poo1.xadrez.cdp.Partida;
 import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
 
-public class ControladorXadrez {
+public class ControladorXadrez implements Serializable {
 	
 	Partida partida = new Partida(this);	
 	List<DadosPartida> dadosPartidas = new ArrayList<DadosPartida>();
@@ -75,9 +76,7 @@ public class ControladorXadrez {
 			else
 			{
 				controladorJogo.exibirErroJogada(jogada);
-			}
-			
-			
+			}			
 		}
 		else if(jogada.length() == 5)
 		{

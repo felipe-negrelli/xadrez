@@ -2,10 +2,11 @@ package br.edu.ifes.poo1.xadrez.cdp;
 
 import br.edu.ifes.poo1.xadrez.cdp.Cor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Peao extends Peca{
+public class Peao extends Peca implements Serializable{
 	
 	public Peao(Cor cor)
 	{
@@ -61,13 +62,9 @@ public class Peao extends Peca{
 			{
 				Posicao posicaoComerDireita = new Posicao(linhaAtual+1, colunaAtual+1);	
 				
-				if(tabuleiro.getCasa(posicaoComerDireita).getOcupada() == true)
+				if(tabuleiro.getCasa(posicaoComerDireita).getOcupada() == true && tabuleiro.getCasa(posicaoComerDireita).getCor() == Cor.Preto)
 				{
-					if(tabuleiro.getCasa(posicaoComerDireita).getCor() == Cor.Preto)
-					{
-						//adiciona a lista de destinos
-						destinosPossiveis.add(posicaoComerDireita);
-					}
+					destinosPossiveis.add(posicaoComerDireita);
 				}
 			}
 		}
@@ -99,7 +96,7 @@ public class Peao extends Peca{
 				
 				if(tabuleiro.getCasa(posicaoComerEsquerda).getOcupada() == true)
 				{
-					if(tabuleiro.getCasa(posicaoComerEsquerda).getCor() == Cor.Preto)
+					if(tabuleiro.getCasa(posicaoComerEsquerda).getCor() == Cor.Branco)
 					{
 						//adiciona a lista de destinos
 						destinosPossiveis.add(posicaoComerEsquerda);
@@ -114,7 +111,7 @@ public class Peao extends Peca{
 				
 				if(tabuleiro.getCasa(posicaoComerDireita).getOcupada() == true)
 				{
-					if(tabuleiro.getCasa(posicaoComerDireita).getCor() == Cor.Preto)
+					if(tabuleiro.getCasa(posicaoComerDireita).getCor() == Cor.Branco)
 					{
 						//adiciona a lista de destinos
 						destinosPossiveis.add(posicaoComerDireita);

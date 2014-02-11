@@ -1,9 +1,10 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jogador {
+public class Jogador implements Serializable{
 	
 	private String nome;
 	private TipoJogador tipoJogador;

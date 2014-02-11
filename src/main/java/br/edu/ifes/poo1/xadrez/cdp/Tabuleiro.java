@@ -1,8 +1,10 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
+import java.io.Serializable;
+
 import br.edu.ifes.poo1.xadrez.cdp.CasaTabuleiro;
 
-public class Tabuleiro {
+public class Tabuleiro implements Serializable{
 	
 	private CasaTabuleiro[][] casas = new CasaTabuleiro[8][8];
 	
@@ -10,6 +12,17 @@ public class Tabuleiro {
 	{
 		inicializaTabuleiro();
 		criaTabuleiro();
+	}
+	
+	public void inicializaTabuleiro()
+	{
+		for(int contadorLinha=0;contadorLinha<8;contadorLinha++)	
+		{
+			for(int contadorColuna=0;contadorColuna<8;contadorColuna++)
+			{	
+				casas[contadorLinha][contadorColuna] = new CasaTabuleiro(new Posicao(8-contadorLinha,contadorColuna+1));			
+			}
+		}
 	}
 	
 	public void criaTabuleiro()
@@ -43,36 +56,12 @@ public class Tabuleiro {
 		casas[7][5].setPeca(new Bispo(Cor.Branco));
 		casas[7][6].setPeca(new Cavalo(Cor.Branco));
 		casas[7][7].setPeca(new Torre(Cor.Branco));		
-		
-	}
-	
-	public void inicializaTabuleiro()
-	{
-		for(int contadorLinha=0;contadorLinha<8;contadorLinha++)	
-		{
-			for(int contadorColuna=0;contadorColuna<8;contadorColuna++)
-			{	
-				casas[contadorLinha][contadorColuna] = new CasaTabuleiro(new Posicao(8-contadorLinha,contadorColuna+1));			
-			}
-		}
-	}	
+	}		
 	
 	public CasaTabuleiro getCasa(Posicao posicao)
 	{
-		CasaTabuleiro casa;
-		
-		casa = casas[8-posicao.getLinha()][posicao.getColuna()-1];	
-		
+		CasaTabuleiro casa;		
+		casa = casas[8-posicao.getLinha()][posicao.getColuna()-1];		
 		return casa;	
 	}
-	/*
-	public CasaTabuleiro getCasa(int linha, int coluna)
-	{
-		CasaTabuleiro casa;
-		
-		casa = casas[linha-1][coluna-1];	
-		
-		return casa;	
-	}
-	*/
 }

@@ -1,6 +1,8 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
-public enum TipoJogador {
+import java.io.Serializable;
+
+public enum TipoJogador implements Serializable{
 	Humano, Computador
 
 }

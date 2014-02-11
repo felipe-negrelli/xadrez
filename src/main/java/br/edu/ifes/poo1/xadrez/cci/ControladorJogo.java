@@ -82,15 +82,27 @@ public class ControladorJogo {
 		}
 		else
 		{
+			//testa se é movimento de captura e remove o X
+			int numero = 0;
+			if(jogada.length()==5 && (jogada.substring(2,3).equals("x") || jogada.substring(2,3).equals("X")))
+			{
+				try	{numero = Integer.parseInt(jogada.substring(0,2)+jogada.substring(3,5));}
+				catch(Exception e){}
+				
+				if(numero>1111 && numero<8888)
+				{
+					jogada = ""+numero;
+				}
+			}
+			
+			//processa a jogada
 			controladorXadrez.processarJogada(jogada);
-		}
-		
+		}		
 	}
 	
 	public boolean isComandoValido(String jogada)
 	{
-		boolean jogadaValida = false;
-		
+		boolean jogadaValida = false;		
 		if(jogada.equals("desistir")    ||
 				jogada.equals("empate") ||
 				jogada.equals("pontos") ||
@@ -108,10 +120,23 @@ public class ControladorJogo {
 		if(numero>1111 && numero<8888)
 		{
 			jogadaValida = true;
+		}		
+		
+		//testa se eh um movimento de captura		
+		if(jogada.length()==5 && (jogada.substring(2,3).equals("x") || jogada.substring(2,3).equals("X")))
+		{
+			try	{numero = Integer.parseInt(jogada.substring(0,2)+jogada.substring(3,5));}
+			catch(Exception e){}
+			
+			if(numero>1111 && numero<8888)
+			{
+				jogadaValida = true;
+			}
 		}
+		
+		
 		return jogadaValida;
-	}
-	
+	}	
 	
 	public void exibeTabuleiro()
 	{	
@@ -132,9 +157,4 @@ public class ControladorJogo {
 	{
 		//implementar
 	}
-	
-	
-	
-	
-	
 }

@@ -1,6 +1,8 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
-public class CasaTabuleiro{
+import java.io.Serializable;
+
+public class CasaTabuleiro implements Serializable{
 	
 	private Posicao posicao;
 	private PecaXadrez pecaAtual;

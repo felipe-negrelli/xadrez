@@ -1,6 +1,8 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
-public enum Cor {
+import java.io.Serializable;
+
+public enum Cor implements Serializable{
 	Preto, Branco
 
 }

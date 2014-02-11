@@ -1,5 +1,7 @@
 package br.edu.ifes.poo1.xadrez.cgt;
 
-public class JogoXadrez {
+import java.io.Serializable;
+
+public class JogoXadrez implements Serializable{
 
 }

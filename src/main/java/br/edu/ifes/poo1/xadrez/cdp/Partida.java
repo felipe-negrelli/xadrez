@@ -1,10 +1,11 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
 
-public class Partida {
+public class Partida implements Serializable{
 	
 	ControladorXadrez controladorXadrez;
 	Tabuleiro tabuleiro = new Tabuleiro();

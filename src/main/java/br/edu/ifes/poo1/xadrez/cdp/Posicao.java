@@ -1,6 +1,8 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
-public class Posicao {
+import java.io.Serializable;
+
+public class Posicao implements Serializable{
 
 	public Posicao(int linha, int coluna)
 	{

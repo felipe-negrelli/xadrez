@@ -1,8 +1,9 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DadosPartida {
+public class DadosPartida implements Serializable{
 	
 	private Jogador ganhador;
 	private Jogador perdedor;
