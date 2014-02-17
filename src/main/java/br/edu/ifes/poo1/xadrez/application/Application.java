@@ -1,4 +1,4 @@
-package br.edu.ifes.ppo1.xadrez.application;
+package br.edu.ifes.poo1.xadrez.application;
 
 import br.edu.ifes.poo1.xadrez.cci.ControladorJogo;
 

@@ -5,6 +5,7 @@ import br.edu.ifes.poo1.xadrez.cdp.EstadoPartida;
 import br.edu.ifes.poo1.xadrez.cdp.Jogador;
 import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
 import br.edu.ifes.poo1.xadrez.cih.TelaTexto;
+import br.edu.ifes.poo1.xadrez.exceptions.*;
 
 public class ControladorJogo {
 	
@@ -20,8 +21,10 @@ public class ControladorJogo {
 			case 1:
 				iniciaMenuJogadores();
 			case 2:
-				exibeDadosPartida();
+				//implementar retornar partida
 			case 3:
+				exibeDadosPartida();
+			case 4:
 				System.exit(0);			
 		}
 	}
@@ -76,27 +79,30 @@ public class ControladorJogo {
 	
 	public void processaJogada(String jogada)
 	{
-		if(jogada == "pontos")
+		if(jogada.equals("pontos"))
 		{
 			int pontos = this.controladorXadrez.getPontosJogadorAtual();
+			this.telaTexto.exibirPontos(pontos);
 		}
 		else
 		{
-			//testa se é movimento de captura e remove o X
-			int numero = 0;
-			if(jogada.length()==5 && (jogada.substring(2,3).equals("x") || jogada.substring(2,3).equals("X")))
+			try
 			{
-				try	{numero = Integer.parseInt(jogada.substring(0,2)+jogada.substring(3,5));}
-				catch(Exception e){}
-				
-				if(numero>1111 && numero<8888)
-				{
-					jogada = ""+numero;
-				}
+				//tenta processar a jogada
+				controladorXadrez.processarJogada(jogada);
 			}
-			
-			//processa a jogada
-			controladorXadrez.processarJogada(jogada);
+			catch(BigRockNotPossibleException bigRockException)
+			{
+				this.exibirErroJogada(jogada);
+			}
+			catch(SmallRockNotPossibleException smallRockException)
+			{
+				this.exibirErroJogada(jogada);
+			}
+			catch(PlayNotPossibleException playNotPossibleException)
+			{
+				this.exibirErroJogada(jogada);
+			}
 		}		
 	}
 	
@@ -112,6 +118,7 @@ public class ControladorJogo {
 			jogadaValida = true;
 		}
 		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		//testa se eh um movimento simples
 		int numero = 0;
 		try	{numero = Integer.parseInt(jogada);}
@@ -122,6 +129,7 @@ public class ControladorJogo {
 			jogadaValida = true;
 		}		
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
 		//testa se eh um movimento de captura		
 		if(jogada.length()==5 && (jogada.substring(2,3).equals("x") || jogada.substring(2,3).equals("X")))
 		{
@@ -132,9 +140,7 @@ public class ControladorJogo {
 			{
 				jogadaValida = true;
 			}
-		}
-		
-		
+		}		
 		return jogadaValida;
 	}	
 	

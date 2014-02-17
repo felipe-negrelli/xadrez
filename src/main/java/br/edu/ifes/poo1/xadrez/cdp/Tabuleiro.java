@@ -1,7 +1,6 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.io.Serializable;
-
 import br.edu.ifes.poo1.xadrez.cdp.CasaTabuleiro;
 
 public class Tabuleiro implements Serializable{

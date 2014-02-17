@@ -12,6 +12,7 @@ import br.edu.ifes.poo1.xadrez.cdp.Jogador;
 import br.edu.ifes.poo1.xadrez.cdp.Partida;
 import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
+import br.edu.ifes.poo1.xadrez.exceptions.*;
 
 public class ControladorXadrez implements Serializable {
 	
@@ -47,7 +48,7 @@ public class ControladorXadrez implements Serializable {
 			this.partida.setJogadorPreto(jogador);
 	}
 	
-	public void processarJogada(String jogada)
+	public void processarJogada(String jogada) throws SmallRockNotPossibleException, BigRockNotPossibleException, PlayNotPossibleException
 	{		
 		if(jogada.length() == 4)
 		{
@@ -70,7 +71,8 @@ public class ControladorXadrez implements Serializable {
 				}
 				else
 				{
-					controladorJogo.exibirErroJogada(jogada);
+					throw new PlayNotPossibleException();
+					
 				}
 			}
 			else
@@ -81,6 +83,20 @@ public class ControladorXadrez implements Serializable {
 		else if(jogada.length() == 5)
 		{
 			
+		}
+		else if(jogada.equals("o-o"))
+		{
+			if(this.partida.getRockPequenoPossivel())
+			{
+				executarRockPequeno();
+			}
+		}
+		else if(jogada.equals("o-o-o"))
+		{
+			if(this.partida.getRockGrandePossivel())
+			{
+				executarRockGrande();
+			}
 		}
 		
 	}
@@ -93,6 +109,26 @@ public class ControladorXadrez implements Serializable {
 	public void setErroLogico()
 	{
 		controladorJogo.exibirErroLogico();
+	}
+	
+	public boolean getRockPequenoPossivel()
+	{
+		return this.partida.getRockPequenoPossivel();
+	}
+	
+	public boolean getRockGrandePossivel()
+	{
+		return this.partida.getRockPequenoPossivel();
+	}	
+	
+	public void executarRockPequeno()
+	{
+		this.partida.executarRockPequeno();
+	}
+	
+	public void executarRockGrande()
+	{
+		this.partida.executarRockGrande();
 	}
 	
 

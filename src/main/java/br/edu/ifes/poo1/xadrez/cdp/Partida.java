@@ -1,23 +1,33 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
+import br.edu.ifes.poo1.xadrez.exceptions.NotFoundException;
 
 public class Partida implements Serializable{
 	
 	ControladorXadrez controladorXadrez;
 	Tabuleiro tabuleiro = new Tabuleiro();
+	
 	EstadoPartida estadoPartida;
+	
 	Jogador jogadorBranco;
 	Jogador jogadorPreto ;
-	Cor vezJogada = Cor.Branco;
+	
+	Cor vezJogada;
+	Cor ganhador;
+	
+	Date dataInicio;
+	Date dataFim;
 	
 	public Partida(ControladorXadrez controlador)
 	{
 		this.controladorXadrez = controlador;
 		this.estadoPartida = EstadoPartida.Normal;
+		vezJogada = Cor.Branco;
 	}
 	
 	public Jogador getJogadorBranco() {
@@ -92,19 +102,20 @@ public class Partida implements Serializable{
 		//move peca
 		PecaXadrez pecaOrigem = this.getTabuleiro().getCasa(posicaoOrigem).getPeca();
 		
+		//testa se existe um peça a ser comida na posicao destino e adiciona pontos
+		if(this.tabuleiro.getCasa(posicaoDestino).getOcupada())
+		{
+			adicionarPontos(this.tabuleiro.getCasa(posicaoDestino).getPeca());
+		}
+		
 		//seta variavel peca no lugar de origem com a nova
 		this.tabuleiro.getCasa(posicaoDestino).setPeca(pecaOrigem);
 		pecaOrigem.incrementaMovimento();
 		
-		if(this.tabuleiro.getCasa(posicaoDestino).getOcupada())
-		{
-			adicionaPontos(this.tabuleiro.getCasa(posicaoDestino).getPeca());
-		}
-		
 		//limpa peca na origem
 		this.tabuleiro.getCasa(posicaoOrigem).limpaPeca();
 		
-		alteraVez();
+		alterarVez();
 	}
 	
 	public boolean existe(List<Posicao> posicoes, Posicao posicaoDestino)
@@ -120,7 +131,7 @@ public class Partida implements Serializable{
 		return achou;
 	}
 	
-	public void alteraVez()
+	public void alterarVez()
 	{
 		if(getJogadorDaVez().getCor() == Cor.Branco)
 		{
@@ -133,7 +144,7 @@ public class Partida implements Serializable{
 	}
 	
 	@SuppressWarnings("incomplete-switch")
-	private void adicionaPontos(PecaXadrez pecaComida)
+	private void adicionarPontos(PecaXadrez pecaComida)
 	{
 		if(vezJogada == Cor.Branco)
 		{
@@ -178,4 +189,290 @@ public class Partida implements Serializable{
 			}
 		}
 	}
+	
+	public void executarRockPequeno()
+	{		
+		Posicao posicaoReiAntiga;
+		Posicao posicaoReiFutura;
+		
+		Posicao posicaoTorreAntiga;
+		Posicao posicaoTorreFutura;
+		
+		if(getJogadorDaVez().getCor() == Cor.Branco)
+		{
+			posicaoReiAntiga = new Posicao(1,5);
+			posicaoReiFutura = new Posicao(1,7);
+			
+			posicaoTorreAntiga = new Posicao(1,8);
+			posicaoTorreFutura = new Posicao(1,6);			
+		}
+		else
+		{
+			posicaoReiAntiga = new Posicao(8,5);
+			posicaoReiFutura = new Posicao(8,7);
+			
+			posicaoTorreAntiga = new Posicao(8,8);
+			posicaoTorreFutura = new Posicao(8,6);			
+		}		
+		
+		//Pega as peças das casas
+		PecaXadrez pecaRei = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
+		PecaXadrez pecaTorre = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
+		
+		//muda o rei de lugar
+		this.tabuleiro.getCasa(posicaoReiFutura).setPeca(pecaRei);
+		pecaRei.incrementaMovimento();		
+		
+		//Muda a torre de lugar
+		this.tabuleiro.getCasa(posicaoTorreFutura).setPeca(pecaTorre);
+		pecaRei.incrementaMovimento();
+		
+		//limpa o rei na origem
+		this.tabuleiro.getCasa(posicaoReiAntiga).limpaPeca();
+		
+		//limpa a torre na origem
+		this.tabuleiro.getCasa(posicaoTorreAntiga).limpaPeca();
+		
+		alterarVez();
+	}	
+	
+	public void executarRockGrande()
+	{
+		Posicao posicaoReiAntiga;
+		Posicao posicaoReiFutura;
+		
+		Posicao posicaoTorreAntiga;
+		Posicao posicaoTorreFutura;
+		
+		if(getJogadorDaVez().getCor() == Cor.Branco)
+		{
+			posicaoReiAntiga = new Posicao(1,5);
+			posicaoReiFutura = new Posicao(1,3);
+			
+			posicaoTorreAntiga = new Posicao(1,1);
+			posicaoTorreFutura = new Posicao(1,4);			
+		}
+		else
+		{
+			posicaoReiAntiga = new Posicao(8,5);
+			posicaoReiFutura = new Posicao(8,3);
+			
+			posicaoTorreAntiga = new Posicao(8,1);
+			posicaoTorreFutura = new Posicao(8,4);			
+		}		
+		
+		//Pega as peças das casas
+		PecaXadrez pecaRei = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
+		PecaXadrez pecaTorre = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
+		
+		//muda o rei de lugar
+		this.tabuleiro.getCasa(posicaoReiFutura).setPeca(pecaRei);
+		pecaRei.incrementaMovimento();		
+		
+		//Muda a torre de lugar
+		this.tabuleiro.getCasa(posicaoTorreFutura).setPeca(pecaTorre);
+		pecaRei.incrementaMovimento();
+		
+		//limpa o rei na origem
+		this.tabuleiro.getCasa(posicaoReiAntiga).limpaPeca();
+		
+		//limpa a torre na origem
+		this.tabuleiro.getCasa(posicaoTorreAntiga).limpaPeca();
+		
+		alterarVez();
+	}
+	
+	public boolean getRockPequenoPossivel()
+	{
+		boolean resposta = false;
+		boolean reiOK = false;
+		boolean casaVaziaEsquerdaOK = false;
+		boolean casaVaziaDireitaOK = false;
+		boolean torreOK = false;
+		
+		if(getJogadorDaVez().getCor() == Cor.Branco)
+		{
+			Posicao posicaoRei = new Posicao(1,5);
+			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
+			{
+				reiOK = true;
+			}
+			
+			
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(1,6);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoCasaVaziaDireita = new Posicao(1,7);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoTorre = new Posicao(1,8);
+			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
+			{
+				torreOK = true;
+			}
+			
+			if(reiOK && casaVaziaEsquerdaOK && casaVaziaDireitaOK && torreOK)
+			{
+				resposta = true;
+			}
+			
+		}
+		else
+		{
+			Posicao posicaoRei = new Posicao(8,4);
+			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
+			{
+				reiOK = true;
+			}
+			
+			
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,2);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoCasaVaziaDireita = new Posicao(8,3);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoTorre = new Posicao(8,1);
+			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
+			{
+				torreOK = true;
+			}
+			
+			if(reiOK && casaVaziaEsquerdaOK && casaVaziaDireitaOK && torreOK)
+			{
+				resposta = true;
+			}
+		}
+		
+		return resposta;
+	}
+	
+	public boolean getRockGrandePossivel()
+	{
+		boolean resposta = false;
+		boolean reiOK = false;
+		boolean casaVaziaEsquerdaOK = false;
+		boolean casaVaziaMeioOK = false;
+		boolean casaVaziaDireitaOK = false;
+		boolean torreOK = false;
+		
+		if(getJogadorDaVez().getCor() == Cor.Branco)
+		{
+			Posicao posicaoTorre = new Posicao(1,1);
+			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
+			{
+				torreOK = true;
+			}
+			
+			
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(1,2);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoCasaVaziaMeio = new Posicao(1,3);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaMeio).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoCasaVaziaDireita = new Posicao(1,4);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoRei = new Posicao(1,5);
+			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
+			{
+				reiOK = true;
+			}
+			
+			if(reiOK && casaVaziaEsquerdaOK && casaVaziaMeioOK && casaVaziaDireitaOK && torreOK)
+			{
+				resposta = true;
+			}
+			
+		}
+		else
+		{
+			Posicao posicaoRei = new Posicao(8,4);
+			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
+					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
+			{
+				reiOK = true;
+			}
+			
+			
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,25);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoCasaVaziaMeio = new Posicao(8,6);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoCasaVaziaDireita = new Posicao(8,7);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
+			{
+				casaVaziaEsquerdaOK = true;
+		
+			}
+			
+			Posicao posicaoTorre = new Posicao(8,8);
+			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
+					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
+			{
+				torreOK = true;
+			}
+			
+			if(reiOK && casaVaziaEsquerdaOK && casaVaziaMeioOK && casaVaziaDireitaOK && torreOK)
+			{
+				resposta = true;
+			}
+		}
+		
+		return resposta;
+	}
+	
 }

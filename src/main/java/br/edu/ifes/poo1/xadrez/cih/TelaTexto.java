@@ -2,8 +2,6 @@ package br.edu.ifes.poo1.xadrez.cih;
 
 import java.io.InputStreamReader;
 import java.util.Scanner;
-
-import br.edu.ifes.poo1.xadrez.cdp.Jogador;
 import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
 
@@ -18,8 +16,9 @@ public class TelaTexto {
 	{
 		String menu = "Xadrez - (Felipe Negrelli e Paulo Vianna)\n\n"+ 
 					  "1. Iniciar uma nova partida\n"+
-					  "2. Dados das partidas\n"+
-					  "3. Sair\n"+
+					  "2. Retornar um partida\n"+
+					  "3. Dados das partidas\n"+
+					  "4. Sair\n"+
 					  "=>";
 		System.out.print(menu);
 	}
@@ -65,17 +64,14 @@ public class TelaTexto {
 		tabuleiroDesenho += "    1  2  3  4  5  6  7  8\n";
 		tabuleiroDesenho += "            Branco\n";	
 		
-		System.out.println(tabuleiroDesenho);
-		
+		System.out.println(tabuleiroDesenho);		
 	}
 	
 	public int recebeRespostaInteiro()
 	{
 		int resultado;		
-		Scanner scanner = new Scanner(new InputStreamReader(System.in));
-		
-		resultado = scanner.nextInt();
-		
+		Scanner scanner = new Scanner(new InputStreamReader(System.in));		
+		resultado = scanner.nextInt();		
 		return resultado;	
 	}
 	
@@ -123,8 +119,7 @@ public class TelaTexto {
 			
 			resultado = scanner.nextLine();
 			
-			if(resultado.length() > 0)
-			{
+			if(resultado.length() > 0)			{
 				resultadoValido = true;
 			}
 			else
@@ -147,14 +142,12 @@ public class TelaTexto {
 			System.out.print(mensagem);
 			Scanner scanner = new Scanner(new InputStreamReader(System.in));
 			
-			resultado = scanner.nextLine();
-			
+			resultado = scanner.nextLine();			
 			if(resultado.length() > 0)
 			{
 				resultadoValido = true;
 			}
-		}
-		
+		}		
 		return resultado;
 	}
 	
@@ -168,8 +161,8 @@ public class TelaTexto {
 		System.out.println("'A jogada não é possível. Digite uma nova jogada.\n\n");
 	}
 	
-	public void exibirPontos(Jogador jogador)
+	public void exibirPontos(int pontos)
 	{
-		
+		System.out.println("Pontos:"+pontos+"\n\n");
 	}
 }
