@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Peao extends Peca implements Serializable{
 	
+	private static final long serialVersionUID = 3192676363552985226L;
+	
 	public Peao(Cor cor)
 	{
 		super();
@@ -42,11 +44,22 @@ public class Peao extends Peca implements Serializable{
 				destinosPossiveis.add(posicao2Frente);
 			}	
 			
-			//testa se pode comer a esquerda
+			
 			if(this.getPosicao().getColuna() > 1)
 			{
-				Posicao posicaoComerEsquerda = new Posicao(linhaAtual+1, colunaAtual-1);	
+				//testa se pode comer a esquerda
+				Posicao posicaoComerEsquerda = new Posicao(linhaAtual+1, colunaAtual-1);			
+				if(tabuleiro.getCasa(posicaoComerEsquerda).getOcupada() == true)
+				{
+					if(tabuleiro.getCasa(posicaoComerEsquerda).getCor() == Cor.Preto)
+					{
+						//adiciona a lista de destinos
+						destinosPossiveis.add(posicaoComerEsquerda);
+					}
+				}
 				
+				//testa em passant a esquerda
+				Posicao posicaoAEsquerda = new Posicao(linhaAtual+1, colunaAtual-1);				
 				if(tabuleiro.getCasa(posicaoComerEsquerda).getOcupada() == true)
 				{
 					if(tabuleiro.getCasa(posicaoComerEsquerda).getCor() == Cor.Preto)

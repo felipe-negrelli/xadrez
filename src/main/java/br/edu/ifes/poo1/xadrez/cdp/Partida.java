@@ -1,14 +1,16 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
-import br.edu.ifes.poo1.xadrez.exceptions.NotFoundException;
 
 public class Partida implements Serializable{
-	
+
+	private static final long serialVersionUID = 3541436818761632524L;
 	ControladorXadrez controladorXadrez;
 	Tabuleiro tabuleiro = new Tabuleiro();
 	
@@ -22,6 +24,8 @@ public class Partida implements Serializable{
 	
 	Date dataInicio;
 	Date dataFim;
+	
+	PecaXadrez ultimaPecaMovida;
 	
 	public Partida(ControladorXadrez controlador)
 	{
@@ -82,6 +86,12 @@ public class Partida implements Serializable{
 		return this.getJogadorPreto().getPontos();
 	}
 	
+	public void setHoraInicioAgora()
+	{
+		Date date = new Date();
+		this.dataInicio = date;
+	}
+	
 	public void processarMovimento(Posicao posicaoOrigem, Posicao posicaoDestino)
 	{
 		//testa se a posicao destino esta entre as possiveis		
@@ -108,9 +118,28 @@ public class Partida implements Serializable{
 			adicionarPontos(this.tabuleiro.getCasa(posicaoDestino).getPeca());
 		}
 		
+		
+		
+		
+		
+		//////////////////////implementar en passant
+		
+		
+		
+		
+		
+		
+		//testa se é um peao e jogada Dupla e seta
+		if(pecaOrigem.getTipoPeca() == TipoPeca.Peao && !pecaOrigem.getMoveu() && posicaoDestino.getLinha() == posicaoOrigem.getLinha()+2)
+		{
+			//pecaOrigem.
+		}
+
 		//seta variavel peca no lugar de origem com a nova
 		this.tabuleiro.getCasa(posicaoDestino).setPeca(pecaOrigem);
 		pecaOrigem.incrementaMovimento();
+		
+		ultimaPecaMovida = pecaOrigem;
 		
 		//limpa peca na origem
 		this.tabuleiro.getCasa(posicaoOrigem).limpaPeca();
@@ -217,7 +246,7 @@ public class Partida implements Serializable{
 		
 		//Pega as peças das casas
 		PecaXadrez pecaRei = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
-		PecaXadrez pecaTorre = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
+		PecaXadrez pecaTorre = this.getTabuleiro().getCasa(posicaoTorreAntiga).getPeca();
 		
 		//muda o rei de lugar
 		this.tabuleiro.getCasa(posicaoReiFutura).setPeca(pecaRei);
@@ -233,6 +262,7 @@ public class Partida implements Serializable{
 		//limpa a torre na origem
 		this.tabuleiro.getCasa(posicaoTorreAntiga).limpaPeca();
 		
+		ultimaPecaMovida = pecaRei;
 		alterarVez();
 	}	
 	
@@ -263,7 +293,7 @@ public class Partida implements Serializable{
 		
 		//Pega as peças das casas
 		PecaXadrez pecaRei = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
-		PecaXadrez pecaTorre = this.getTabuleiro().getCasa(posicaoReiAntiga).getPeca();
+		PecaXadrez pecaTorre = this.getTabuleiro().getCasa(posicaoTorreAntiga).getPeca();
 		
 		//muda o rei de lugar
 		this.tabuleiro.getCasa(posicaoReiFutura).setPeca(pecaRei);
@@ -278,6 +308,8 @@ public class Partida implements Serializable{
 		
 		//limpa a torre na origem
 		this.tabuleiro.getCasa(posicaoTorreAntiga).limpaPeca();
+		
+		ultimaPecaMovida = pecaRei;
 		
 		alterarVez();
 	}
@@ -311,7 +343,7 @@ public class Partida implements Serializable{
 			Posicao posicaoCasaVaziaDireita = new Posicao(1,7);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
-				casaVaziaEsquerdaOK = true;
+				casaVaziaDireitaOK = true;
 		
 			}
 			
@@ -331,7 +363,7 @@ public class Partida implements Serializable{
 		}
 		else
 		{
-			Posicao posicaoRei = new Posicao(8,4);
+			Posicao posicaoRei = new Posicao(8,5);
 			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
@@ -340,21 +372,21 @@ public class Partida implements Serializable{
 			}
 			
 			
-			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,2);
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,6);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
 			{
 				casaVaziaEsquerdaOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaDireita = new Posicao(8,3);
+			Posicao posicaoCasaVaziaDireita = new Posicao(8,7);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
-				casaVaziaEsquerdaOK = true;
+				casaVaziaDireitaOK = true;
 		
 			}
 			
-			Posicao posicaoTorre = new Posicao(8,1);
+			Posicao posicaoTorre = new Posicao(8,8);
 			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
@@ -401,14 +433,14 @@ public class Partida implements Serializable{
 			Posicao posicaoCasaVaziaMeio = new Posicao(1,3);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaMeio).getOcupada() == false)
 			{
-				casaVaziaEsquerdaOK = true;
+				casaVaziaMeioOK = true;
 		
 			}
 			
 			Posicao posicaoCasaVaziaDireita = new Posicao(1,4);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
-				casaVaziaEsquerdaOK = true;
+				casaVaziaDireitaOK = true;
 		
 			}
 			
@@ -428,7 +460,7 @@ public class Partida implements Serializable{
 		}
 		else
 		{
-			Posicao posicaoRei = new Posicao(8,4);
+			Posicao posicaoRei = new Posicao(8,5);
 			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
@@ -437,28 +469,28 @@ public class Partida implements Serializable{
 			}
 			
 			
-			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,25);
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,2);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
 			{
 				casaVaziaEsquerdaOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaMeio = new Posicao(8,6);
-			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
+			Posicao posicaoCasaVaziaMeio = new Posicao(8,3);
+			if(this.tabuleiro.getCasa(posicaoCasaVaziaMeio).getOcupada() == false)
 			{
-				casaVaziaEsquerdaOK = true;
+				casaVaziaMeioOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaDireita = new Posicao(8,7);
+			Posicao posicaoCasaVaziaDireita = new Posicao(8,4);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
-				casaVaziaEsquerdaOK = true;
+				casaVaziaDireitaOK = true;
 		
 			}
 			
-			Posicao posicaoTorre = new Posicao(8,8);
+			Posicao posicaoTorre = new Posicao(8,1);
 			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
@@ -474,5 +506,14 @@ public class Partida implements Serializable{
 		
 		return resposta;
 	}
+	
+	public String toString()
+	{
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		
+		return dateFormat.format(this.dataInicio) + " - Branco: " + jogadorBranco.getNome()+ "(" + jogadorBranco.getPontos() +")"+
+											" Preto: " + jogadorPreto.getNome()+ "(" + jogadorPreto.getPontos() +")";
+	}
+	
 	
 }

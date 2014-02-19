@@ -1,74 +1,142 @@
 package br.edu.ifes.poo1.xadrez.cci;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import br.edu.ifes.poo1.xadrez.cdp.Cor;
 import br.edu.ifes.poo1.xadrez.cdp.EstadoPartida;
 import br.edu.ifes.poo1.xadrez.cdp.Jogador;
+import br.edu.ifes.poo1.xadrez.cdp.Partida;
 import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
 import br.edu.ifes.poo1.xadrez.cih.TelaTexto;
 import br.edu.ifes.poo1.xadrez.exceptions.*;
 
-public class ControladorJogo {
+public class ControladorJogo implements Serializable {
 	
 	ControladorXadrez controladorXadrez = new ControladorXadrez(this);
 	TelaTexto telaTexto = new TelaTexto();
 	
 	public void iniciar()
 	{
-		telaTexto.imprimeMenu();	
-		int resposta = telaTexto.recebeRespostaInteiro();
+		try
+		{
+			controladorXadrez.lerPartidasSalvas();
+		}
+		catch(Exception ex)
+		{
+			this.telaTexto.exibirErro("Não foi possível carregar dados salvos");
+		}	
 		
-		switch(resposta){
-			case 1:
-				iniciaMenuJogadores();
-			case 2:
-				//implementar retornar partida
-			case 3:
-				exibeDadosPartida();
-			case 4:
-				System.exit(0);			
+		exibirMenuInicial();
+	}
+	
+	public void exibirMenuInicial()
+	{
+		int resposta = 0;		
+		while(resposta != 4)
+		{
+			telaTexto.imprimeMenu();	
+			resposta = telaTexto.recebeRespostaInteiro();
+			
+			switch(resposta){
+				case 1:
+					iniciaMenuJogadores();
+					break;
+				case 2:
+					retornarPartida();
+					break;
+				case 3:
+					exibirDadosPartida();
+					break;
+				case 4:
+					System.exit(0);
+					break;
+			}
+		}
+	}
+	
+	public void retornarPartida()
+	{
+		List<Partida> listaPartidasAtivas = this.controladorXadrez.getListaPartidasAtivas();
+		if(listaPartidasAtivas.size() > 0)
+		{
+			String mensagem = "";
+			
+			for(int contador=0; contador<listaPartidasAtivas.size(); contador++)
+			{
+				mensagem += ""+ (contador+1) + " - " + listaPartidasAtivas.get(contador).toString()+ "\n";
+			}
+			
+			mensagem += "\n\nDigite o numero da partida a ser retomada:" ;
+			this.telaTexto.exibirMensagem(mensagem);
+		}
+		else
+		{
+			this.telaTexto.exibirErro("\nNão existem partidas a serem continuadas.");
 		}
 	}
 	
 	public void iniciaMenuJogadores()
 	{
-		boolean maquina = true;
+		this.controladorXadrez.inicializaNovaPartida();
+		this.telaTexto.exibirMenuJogadores();
+		
+		boolean respostaOK = false;
+		while(!respostaOK)
+		{
+			int resposta = telaTexto.recebeRespostaInteiro();
+			switch (resposta) {
+			case 1:
+				lerNomesJogadores(true);
+				respostaOK = true;
+				break;
+			case 2:
+				lerNomesJogadores(false);
+				respostaOK = true;
+				break;
+			default:
+				this.telaTexto.exibirErro("Entrada inválida! Digite 1 ou 2:");
+				break;
+			}
+		}
+		
+		iniciarPartida();		
+	}
+	
+	public void lerNomesJogadores(boolean pretoMaquina)
+	{
 		Jogador jogadorBranco = new Jogador(Cor.Branco);
 		Jogador jogadorPreto = new Jogador(Cor.Preto);
 		
-		telaTexto.exibirMenuJogadores();		
-		int resposta = telaTexto.recebeRespostaInteiro();
+		jogadorBranco.setNome(this.telaTexto.lerNomeJogadorBranco());			
 		
-		jogadorBranco.setNome(telaTexto.lerNomeJogadorBranco());			
-		
-		if(resposta == 1) //contra a maquina
+		if(pretoMaquina) //contra a maquina
 		{
-			maquina = true;
 			jogadorPreto.setNome("Zeus");
 		}
-		if(resposta == 2) //contra outro jogador
+		else //contra outro jogador
 		{
-			maquina = false;
-			jogadorPreto.setNome(telaTexto.lerNomeJogadorPreto());
+			jogadorPreto.setNome(this.telaTexto.lerNomeJogadorPreto());
 		}
 		
-		controladorXadrez.salvaJogador(jogadorBranco);
-		controladorXadrez.salvaJogador(jogadorPreto);		
-			
-		iniciaPartida(maquina);		
+		controladorXadrez.salvarJogador(jogadorBranco);
+		controladorXadrez.salvarJogador(jogadorPreto);	
 	}
 
-	public void iniciaPartida(boolean computador)
+	public void iniciarPartida()
 	{	
 		while(controladorXadrez.getEstadoPartida() == EstadoPartida.Normal)
 		{
-			exibeTabuleiro();
+			exibirTabuleiro();
 			
 			Jogador jogador = controladorXadrez.getJodadorDaVez();
 			String jogada = telaTexto.lerJogada(jogador.getNome()+" ("+jogador.getCor().toString()+")");
 			
 			if(isComandoValido(jogada))
 			{
-				processaJogada(jogada);
+				processarJogada(jogada);
 			}
 			else
 			{
@@ -77,12 +145,24 @@ public class ControladorJogo {
 		}
 	}	
 	
-	public void processaJogada(String jogada)
+	public void processarJogada(String jogada)
 	{
 		if(jogada.equals("pontos"))
 		{
 			int pontos = this.controladorXadrez.getPontosJogadorAtual();
 			this.telaTexto.exibirPontos(pontos);
+		}
+		else if(jogada.equals("sair"))
+		{
+			try
+			{
+				this.controladorXadrez.salvarPartidas();
+			}
+			catch(Exception ex)
+			{
+				this.telaTexto.exibirErro("Erro. Não foi possível salvar os dados em disco!");
+			}
+			this.exibirMenuInicial();
 		}
 		else
 		{
@@ -112,6 +192,7 @@ public class ControladorJogo {
 		if(jogada.equals("desistir")    ||
 				jogada.equals("empate") ||
 				jogada.equals("pontos") ||
+				jogada.equals("sair") ||				
 				jogada.equals("O-O-O")  ||
 				jogada.equals("O-O") )
 		{
@@ -144,7 +225,7 @@ public class ControladorJogo {
 		return jogadaValida;
 	}	
 	
-	public void exibeTabuleiro()
+	public void exibirTabuleiro()
 	{	
 		telaTexto.imprimeTabuleiro(controladorXadrez.getTabuleiro());
 	}
@@ -159,8 +240,9 @@ public class ControladorJogo {
 		telaTexto.exibirErroLogico();
 	}
 	
-	public void exibeDadosPartida()
+	public void exibirDadosPartida()
 	{
 		//implementar
 	}
+	
 }

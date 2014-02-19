@@ -8,5 +8,6 @@ public class Application {
 		// TODO Auto-generated method stub
 		ControladorJogo controleJogo = new ControladorJogo();		
 		controleJogo.iniciar();
+		//
 	}
 }

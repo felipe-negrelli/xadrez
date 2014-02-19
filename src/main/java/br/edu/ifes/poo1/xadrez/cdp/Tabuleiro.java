@@ -5,6 +5,7 @@ import br.edu.ifes.poo1.xadrez.cdp.CasaTabuleiro;
 
 public class Tabuleiro implements Serializable{
 	
+	private static final long serialVersionUID = 2324162259364089893L;
 	private CasaTabuleiro[][] casas = new CasaTabuleiro[8][8];
 	
 	public Tabuleiro()
@@ -18,7 +19,7 @@ public class Tabuleiro implements Serializable{
 		for(int contadorLinha=0;contadorLinha<8;contadorLinha++)	
 		{
 			for(int contadorColuna=0;contadorColuna<8;contadorColuna++)
-			{	
+			{
 				casas[contadorLinha][contadorColuna] = new CasaTabuleiro(new Posicao(8-contadorLinha,contadorColuna+1));			
 			}
 		}

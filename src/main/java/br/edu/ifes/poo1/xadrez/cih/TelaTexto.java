@@ -1,11 +1,13 @@
 package br.edu.ifes.poo1.xadrez.cih;
 
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Scanner;
+
 import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
 
-public class TelaTexto {
+public class TelaTexto implements Serializable{
 	
 	public TelaTexto()
 	{
@@ -115,9 +117,9 @@ public class TelaTexto {
 		{
 			String mensagem = "\nDigite o nome do Jogador Preto:\n=>";
 			System.out.println(mensagem);
-			Scanner scanner = new Scanner(new InputStreamReader(System.in));
-			
+			Scanner scanner = new Scanner(new InputStreamReader(System.in));			
 			resultado = scanner.nextLine();
+			scanner.close();
 			
 			if(resultado.length() > 0)			{
 				resultadoValido = true;
@@ -156,6 +158,11 @@ public class TelaTexto {
 		System.out.println("'"+jogada+"'"+" não é uma jogada válida.\n\n");
 	}
 	
+	public void exibirErro(String mensagem)
+	{
+		System.out.println(mensagem+"\n\n");
+	}
+	
 	public void exibirErroLogico()
 	{
 		System.out.println("'A jogada não é possível. Digite uma nova jogada.\n\n");
@@ -164,5 +171,10 @@ public class TelaTexto {
 	public void exibirPontos(int pontos)
 	{
 		System.out.println("Pontos:"+pontos+"\n\n");
+	}
+	
+	public void exibirMensagem(String mensagem)
+	{
+		System.out.println(mensagem+"\n\n");
 	}
 }

@@ -5,8 +5,10 @@ import java.util.List;
 
 public abstract class Peca implements PecaXadrez,Serializable {
 	
+	private static final long serialVersionUID = -2043646471672017146L;
 	private Cor cor;
 	private int quantMovimentos = 0;
+	private boolean movimentoDuplo = false;
 	private TipoPeca tipoPeca;
 	private Posicao posicao;
 	
@@ -53,6 +55,14 @@ public abstract class Peca implements PecaXadrez,Serializable {
 	public void incrementaMovimento()
 	{
 		this.quantMovimentos++;
+	}
+	
+	public boolean isMovimentoDuplo() {
+		return movimentoDuplo;
+	}
+
+	public void setMovimentoDuplo(boolean movimentoDuplo) {
+		this.movimentoDuplo = movimentoDuplo;
 	}
 	
 	public abstract List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);
