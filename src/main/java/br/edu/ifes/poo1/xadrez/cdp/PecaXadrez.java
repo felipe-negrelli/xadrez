@@ -22,4 +22,8 @@ public interface PecaXadrez {
 	
 	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);
 	
+	public int getValorEmPontos();
+
+	public void setValorEmPontos(int valorEmPontos);
+	
 }

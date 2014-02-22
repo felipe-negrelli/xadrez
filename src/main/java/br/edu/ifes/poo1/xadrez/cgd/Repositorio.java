@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
 import java.util.List;
 
 import br.edu.ifes.poo1.xadrez.cdp.*;;
@@ -18,13 +17,8 @@ public class Repositorio {
 		ObjectOutputStream out = null;
 		try
 		{
-			out = new ObjectOutputStream(new FileOutputStream(path));
-			
-			//converte em vetores
-			Partida[] vetorPartidas = new Partida[listaPartidas.size()];
-			vetorPartidas = listaPartidas.toArray(vetorPartidas);			
-			
-			out.writeObject(vetorPartidas);
+			out = new ObjectOutputStream(new FileOutputStream(path));			
+			out.writeObject(listaPartidas);
 		}
 		finally
 		{
@@ -32,6 +26,7 @@ public class Repositorio {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static List<Partida> lerDados() throws Exception
 	{
 		String path = new File("").getAbsolutePath() + File.separator + "partidas.dat";
@@ -39,13 +34,7 @@ public class Repositorio {
 		try
 		{
 			in = new ObjectInputStream(new FileInputStream(path));
-
-			//le o vetor de partidas
-			Partida[] vetorPartidas = (Partida[])in.readObject();
-
-			//converte de vetor para lista			
-			List<Partida> partidas = Arrays.asList(vetorPartidas);
-			
+			List<Partida> partidas = (List<Partida>)in.readObject();	
 			return partidas;
 		}
 		finally

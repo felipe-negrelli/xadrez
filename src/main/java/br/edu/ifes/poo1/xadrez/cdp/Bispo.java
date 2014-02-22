@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.jndi.toolkit.dir.ContainmentFilter;
-
 public class Bispo extends Peca implements Serializable {
 	
 	public Bispo(Cor cor)
@@ -13,6 +11,7 @@ public class Bispo extends Peca implements Serializable {
 		super();
 		this.setTipoPeca(TipoPeca.Bispo);
 		this.setCor(cor);
+		this.setValorEmPontos(3);
 	}
 
 	@Override
@@ -25,7 +24,7 @@ public class Bispo extends Peca implements Serializable {
 		int contadorColuna = colunaAtual+1;
 		for(int contadorLinha=linhaAtual+1;contadorLinha<=8 && contadorColuna<=8;contadorLinha++)
 		{
-			Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+			Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -48,7 +47,7 @@ public class Bispo extends Peca implements Serializable {
 		contadorColuna = colunaAtual+1;
 		for(int contadorLinha=linhaAtual-1;contadorLinha>=1 && contadorColuna<=8;contadorLinha--)
 		{
-			Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+			Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -71,7 +70,7 @@ public class Bispo extends Peca implements Serializable {
 		contadorColuna = colunaAtual-1;
 		for(int contadorLinha=linhaAtual-1;contadorLinha>=1 && contadorColuna>=1;contadorLinha--)
 		{
-			Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+			Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -94,7 +93,7 @@ public class Bispo extends Peca implements Serializable {
 		contadorColuna = colunaAtual-1;
 		for(int contadorLinha=linhaAtual+1;contadorLinha<=8 && contadorColuna>=1;contadorLinha++)
 		{
-			Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+			Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos

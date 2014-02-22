@@ -11,6 +11,7 @@ public class Torre extends Peca implements Serializable{
 		super();
 		this.setTipoPeca(TipoPeca.Torre);
 		this.setCor(cor);
+		this.setValorEmPontos(5);
 	}
 
 	@Override
@@ -23,7 +24,7 @@ public class Torre extends Peca implements Serializable{
 		//testa as posições a frente em relação ao branco e atras em relacao ao preto
 		for(int contador=linhaAtual+1;contador<=8;contador++)
 		{
-			Posicao posicaoAtual = new Posicao(contador, colunaAtual);			
+			Posicao posicaoAtual = new Posicao(colunaAtual,contador);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -44,7 +45,7 @@ public class Torre extends Peca implements Serializable{
 		//testa as posições a atras em relação ao branco e a frente em relacao ao preto
 		for(int contador=linhaAtual-1;contador>=1;contador--)
 		{
-			Posicao posicaoAtual = new Posicao(contador, colunaAtual);			
+			Posicao posicaoAtual = new Posicao(colunaAtual,contador);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -65,7 +66,7 @@ public class Torre extends Peca implements Serializable{
 		//testa as posições a esquerda em relação ao branco e a direita em relacao ao preto
 		for(int contador=colunaAtual-1;contador>=1;contador--)
 		{
-			Posicao posicaoAtual = new Posicao(linhaAtual, contador);			
+			Posicao posicaoAtual = new Posicao(contador,linhaAtual);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -86,7 +87,7 @@ public class Torre extends Peca implements Serializable{
 		//testa as posições a direita em relação ao branco e a esquerda em relacao ao preto
 		for(int contador=colunaAtual+1;contador<=8;contador++)
 		{
-			Posicao posicaoAtual = new Posicao(linhaAtual, contador);			
+			Posicao posicaoAtual = new Posicao(contador,linhaAtual);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos

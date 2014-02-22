@@ -11,6 +11,7 @@ public class Rei  extends Peca implements Serializable{
 		super();
 		this.setTipoPeca(TipoPeca.Rei);
 		this.setCor(cor);
+		this.setValorEmPontos(0);
 	}
 
 	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro) {
@@ -26,7 +27,7 @@ public class Rei  extends Peca implements Serializable{
 			
 			
 			//testa se a posicao a frente esta vazia
-			Posicao posicaoFrente = new Posicao(linhaAtual+1, colunaAtual);			
+			Posicao posicaoFrente = new Posicao(colunaAtual,linhaAtual+1);			
 			if((tabuleiro.getCasa(posicaoFrente).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFrente).getOcupada() == true) && (tabuleiro.getCasa(posicaoFrente).getCor() != this.getCor())))
 			{
 				//adiciona a lista de destinos
@@ -37,7 +38,7 @@ public class Rei  extends Peca implements Serializable{
 			if(this.getPosicao().getColuna() > 1)
 			{			
 				//testa se a posicao a frente e esquerda esta vazia
-				Posicao posicaoFrenteEsquerda = new Posicao(linhaAtual+1, colunaAtual-1);			
+				Posicao posicaoFrenteEsquerda = new Posicao(colunaAtual-1,linhaAtual+1);			
 				if((tabuleiro.getCasa(posicaoFrenteEsquerda).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFrenteEsquerda).getOcupada() == true) && (tabuleiro.getCasa(posicaoFrenteEsquerda).getCor() != this.getCor())))
 				{
 					//adiciona a lista de destinos
@@ -49,7 +50,7 @@ public class Rei  extends Peca implements Serializable{
 			if(this.getPosicao().getColuna() < 8)
 			{				
 				//testa se a posicao a frente e direita esta vazia
-				Posicao posicaoFrenteDireita = new Posicao(linhaAtual+1, colunaAtual+1);			
+				Posicao posicaoFrenteDireita = new Posicao(colunaAtual+1,linhaAtual+1);			
 				if((tabuleiro.getCasa(posicaoFrenteDireita).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFrenteDireita).getOcupada() == true) && (tabuleiro.getCasa(posicaoFrenteDireita).getCor() != this.getCor())))
 				{
 					//adiciona a lista de destinos
@@ -62,7 +63,7 @@ public class Rei  extends Peca implements Serializable{
 		if(this.getPosicao().getColuna() > 1)
 		{	
 			//testa se a posição a esquerda esta vazia
-			Posicao posicaoEsquerda = new Posicao(linhaAtual, colunaAtual-1);			
+			Posicao posicaoEsquerda = new Posicao(colunaAtual-1,linhaAtual);			
 			if((tabuleiro.getCasa(posicaoEsquerda).getOcupada() == false) || ((tabuleiro.getCasa(posicaoEsquerda).getOcupada() == true) && (tabuleiro.getCasa(posicaoEsquerda).getCor() != this.getCor())))
 			{
 				//adiciona a lista de destinos
@@ -75,7 +76,7 @@ public class Rei  extends Peca implements Serializable{
 		if(this.getPosicao().getColuna() < 8)
 		{	
 			//testa se a posição a direita esta vazia
-			Posicao posicaoDireita = new Posicao(linhaAtual, colunaAtual+1);			
+			Posicao posicaoDireita = new Posicao(colunaAtual+1,linhaAtual);			
 			if((tabuleiro.getCasa(posicaoDireita).getOcupada() == false) || ((tabuleiro.getCasa(posicaoDireita).getOcupada() == true) && (tabuleiro.getCasa(posicaoDireita).getCor() != this.getCor())))
 			{
 				//adiciona a lista de destinos
@@ -87,7 +88,7 @@ public class Rei  extends Peca implements Serializable{
 		if(this.getPosicao().getLinha() > 1)
 		{
 			//testa se a posicao a atras esta vazia
-			Posicao posicaoAtras = new Posicao(linhaAtual-1, colunaAtual);			
+			Posicao posicaoAtras = new Posicao(colunaAtual,linhaAtual-1);			
 			if((tabuleiro.getCasa(posicaoAtras).getOcupada() == false) || ((tabuleiro.getCasa(posicaoAtras).getOcupada() == true) && (tabuleiro.getCasa(posicaoAtras).getCor() != this.getCor())))
 			{
 				//adiciona a lista de destinos
@@ -98,7 +99,7 @@ public class Rei  extends Peca implements Serializable{
 			if(this.getPosicao().getColuna() > 1)
 			{			
 				//testa se a posicao a atras e esquerda esta vazia
-				Posicao posicaoAtrasEsquerda = new Posicao(linhaAtual-1, colunaAtual-1);			
+				Posicao posicaoAtrasEsquerda = new Posicao(colunaAtual-1,linhaAtual-1);			
 				if((tabuleiro.getCasa(posicaoAtrasEsquerda).getOcupada() == false) || ((tabuleiro.getCasa(posicaoAtrasEsquerda).getOcupada() == true) && (tabuleiro.getCasa(posicaoAtrasEsquerda).getCor() != this.getCor())))
 				{
 					//adiciona a lista de destinos
@@ -110,7 +111,7 @@ public class Rei  extends Peca implements Serializable{
 			if(this.getPosicao().getColuna() < 8)
 			{				
 				//testa se a posicao atrás e direita esta vazia
-				Posicao posicaoAtrasDireita = new Posicao(linhaAtual-1, colunaAtual+1);			
+				Posicao posicaoAtrasDireita = new Posicao(colunaAtual+1,linhaAtual-1);			
 				if((tabuleiro.getCasa(posicaoAtrasDireita).getOcupada() == false) || ((tabuleiro.getCasa(posicaoAtrasDireita).getOcupada() == true) && (tabuleiro.getCasa(posicaoAtrasDireita).getCor() != this.getCor())))
 				{
 					//adiciona a lista de destinos

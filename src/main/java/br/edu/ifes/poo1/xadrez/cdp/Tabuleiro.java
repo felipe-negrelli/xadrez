@@ -1,7 +1,7 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.io.Serializable;
-import br.edu.ifes.poo1.xadrez.cdp.CasaTabuleiro;
+import br.edu.ifes.poo1.xadrez.cdp.*;
 
 public class Tabuleiro implements Serializable{
 	
@@ -20,7 +20,7 @@ public class Tabuleiro implements Serializable{
 		{
 			for(int contadorColuna=0;contadorColuna<8;contadorColuna++)
 			{
-				casas[contadorLinha][contadorColuna] = new CasaTabuleiro(new Posicao(8-contadorLinha,contadorColuna+1));			
+				casas[contadorLinha][contadorColuna] = new CasaTabuleiro(new Posicao(contadorColuna+1,8-contadorLinha));			
 			}
 		}
 	}

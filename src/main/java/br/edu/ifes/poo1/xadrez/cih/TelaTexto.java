@@ -4,11 +4,14 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import br.edu.ifes.poo1.xadrez.cdp.Jogador;
 import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 import br.edu.ifes.poo1.xadrez.cdp.Tabuleiro;
 
 public class TelaTexto implements Serializable{
 	
+	private static final long serialVersionUID = -9176851184338529236L;
+
 	public TelaTexto()
 	{
 		
@@ -16,8 +19,7 @@ public class TelaTexto implements Serializable{
 	
 	public void imprimeMenu()
 	{
-		String menu = "Xadrez - (Felipe Negrelli e Paulo Vianna)\n\n"+ 
-					  "1. Iniciar uma nova partida\n"+
+		String menu = "1. Iniciar uma nova partida\n"+
 					  "2. Retornar um partida\n"+
 					  "3. Dados das partidas\n"+
 					  "4. Sair\n"+
@@ -25,9 +27,9 @@ public class TelaTexto implements Serializable{
 		System.out.print(menu);
 	}
 	
-	public void imprimeTabuleiro(Tabuleiro tabuleiro)
+	public void imprimirTabuleiro(Tabuleiro tabuleiro)
 	{
-		String tabuleiroDesenho = "";
+		String tabuleiroDesenho = "\n\n";
 		
 		tabuleiroDesenho = "            Preto\n";
 		tabuleiroDesenho += "    1  2  3  4  5  6  7  8\n";
@@ -41,10 +43,10 @@ public class TelaTexto implements Serializable{
 			for(int contadorColuna=1;contadorColuna<9;contadorColuna++)
 			{			
 				//testa para ver se existe uma peça ou não
-				if(tabuleiro.getCasa(new Posicao(contadorLinha,contadorColuna)).getOcupada())
+				if(tabuleiro.getCasa(new Posicao(contadorColuna,contadorLinha)).getOcupada())
 				{
 					//se existir adiciona a letra equivalente ao tabuleiro
-					tabuleiroDesenho += tabuleiro.getCasa(new Posicao(contadorLinha,contadorColuna)).getPeca().toString();
+					tabuleiroDesenho += tabuleiro.getCasa(new Posicao(contadorColuna,contadorLinha)).getPeca().toString();
 				}
 				//se não tiver peça, coloca um ponto
 				else
@@ -69,17 +71,25 @@ public class TelaTexto implements Serializable{
 		System.out.println(tabuleiroDesenho);		
 	}
 	
+	@SuppressWarnings("resource")
 	public int recebeRespostaInteiro()
 	{
-		int resultado;		
-		Scanner scanner = new Scanner(new InputStreamReader(System.in));		
-		resultado = scanner.nextInt();		
+		int resultado = 0;		
+		Scanner scanner = new Scanner(new InputStreamReader(System.in));
+		try
+		{
+			resultado = scanner.nextInt();	
+		}
+		catch(Exception e)
+		{
+			System.out.println("Entrada Inválida!");
+		}
 		return resultado;	
 	}
 	
 	public void exibirMenuJogadores()
 	{	
-		String menu = "\n\nDeseja jogar contra o computador ou contra outro usuário?\n"+
+		String menu = "\nDeseja jogar contra o computador ou contra outro usuário?\n"+
 				  "1. Sozinho (Contra o computador).\n"+
 				  "2. Contra outro usuário.\n"+
 				  "=>";
@@ -93,8 +103,9 @@ public class TelaTexto implements Serializable{
 		
 		while(!resultadoValido)
 		{
-			String mensagem = "\n\nDigite o nome do Jogador Branco:\n=>";
+			String mensagem = "\nDigite o nome do Jogador Branco:\n=>";
 			System.out.print(mensagem);
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(new InputStreamReader(System.in));
 			
 			resultado = scanner.nextLine();
@@ -116,11 +127,10 @@ public class TelaTexto implements Serializable{
 		while(!resultadoValido)
 		{
 			String mensagem = "\nDigite o nome do Jogador Preto:\n=>";
-			System.out.println(mensagem);
+			System.out.print(mensagem);
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(new InputStreamReader(System.in));			
-			resultado = scanner.nextLine();
-			scanner.close();
-			
+			resultado = scanner.nextLine();			
 			if(resultado.length() > 0)			{
 				resultadoValido = true;
 			}
@@ -142,9 +152,10 @@ public class TelaTexto implements Serializable{
 		{
 			String mensagem = nomeJogador+" =>";
 			System.out.print(mensagem);
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(new InputStreamReader(System.in));
 			
-			resultado = scanner.nextLine();			
+			resultado = scanner.nextLine();
 			if(resultado.length() > 0)
 			{
 				resultadoValido = true;
@@ -155,7 +166,7 @@ public class TelaTexto implements Serializable{
 	
 	public void exibirErroJogada(String jogada)
 	{
-		System.out.println("'"+jogada+"'"+" não é uma jogada válida.\n\n");
+		System.out.println("'"+jogada+"'"+" não é uma jogada válida.\n");
 	}
 	
 	public void exibirErro(String mensagem)
@@ -165,16 +176,24 @@ public class TelaTexto implements Serializable{
 	
 	public void exibirErroLogico()
 	{
-		System.out.println("'A jogada não é possível. Digite uma nova jogada.\n\n");
+		System.out.println("'A jogada não é possível. Digite uma nova jogada.\n");
 	}
 	
-	public void exibirPontos(int pontos)
+	public void exibirPontos(Jogador jogadorAtual)
 	{
-		System.out.println("Pontos:"+pontos+"\n\n");
+		String mensagem = "Pontos: " + jogadorAtual.getPontos() + "\n";
+		mensagem += "Peças Capturadas:\n";
+		
+		for(int contador=0;contador<jogadorAtual.getPecasCapturadas().size();contador++)
+		{
+			mensagem += jogadorAtual.getPecasCapturadas().get(contador).getTipoPeca().toString()+"\n";
+		}
+		
+		System.out.println(mensagem);
 	}
 	
 	public void exibirMensagem(String mensagem)
 	{
-		System.out.println(mensagem+"\n\n");
+		System.out.print(mensagem);
 	}
 }

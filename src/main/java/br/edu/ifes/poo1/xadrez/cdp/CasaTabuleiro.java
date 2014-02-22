@@ -1,9 +1,11 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.io.Serializable;
+import br.edu.ifes.poo1.xadrez.cdp.Posicao;
 
 public class CasaTabuleiro implements Serializable{
 	
+	private static final long serialVersionUID = 5738557159947594849L;
 	private Posicao posicao;
 	private PecaXadrez pecaAtual;
 	

@@ -11,6 +11,7 @@ public class Cavalo  extends Peca implements Serializable{
 		super();
 		this.setTipoPeca(TipoPeca.Cavalo);
 		this.setCor(cor);
+		this.setValorEmPontos(3);
 	}
 
 	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro) {
@@ -18,7 +19,7 @@ public class Cavalo  extends Peca implements Serializable{
 		int colunaAtual = this.getPosicao().getColuna();
 		List<Posicao> destinosPossiveis = new ArrayList<Posicao>();
 		
-		Posicao posicaoFutura = new Posicao(linhaAtual+1, colunaAtual-2);	
+		Posicao posicaoFutura = new Posicao(colunaAtual-2,linhaAtual+1);	
 		if(posicaoFutura.getLinha()<=8 && posicaoFutura.getColuna()>=1)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))
@@ -28,7 +29,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual+2, colunaAtual-1);	
+		posicaoFutura = new Posicao(colunaAtual-1,linhaAtual+2);	
 		if(posicaoFutura.getLinha()<=8 && posicaoFutura.getColuna()>=1)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))
@@ -38,7 +39,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual+2, colunaAtual+1);	
+		posicaoFutura = new Posicao(colunaAtual+1,linhaAtual+2);	
 		if(posicaoFutura.getLinha()<=8 && posicaoFutura.getColuna()<=8)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))
@@ -48,7 +49,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual+1, colunaAtual+2);	
+		posicaoFutura = new Posicao(colunaAtual+2,linhaAtual+1);	
 		if(posicaoFutura.getLinha()<=8 && posicaoFutura.getColuna()<=8)	
 		{
 			//
@@ -59,7 +60,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual-1, colunaAtual-2);	
+		posicaoFutura = new Posicao(colunaAtual-2,linhaAtual-1);	
 		if(posicaoFutura.getLinha()>=1 && posicaoFutura.getColuna()>=1)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))
@@ -69,7 +70,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual-2, colunaAtual-1);	
+		posicaoFutura = new Posicao(colunaAtual-1,linhaAtual-2);	
 		if(posicaoFutura.getLinha()>=1 && posicaoFutura.getColuna()>=1)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))
@@ -79,7 +80,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual-2, colunaAtual+1);	
+		posicaoFutura = new Posicao(colunaAtual+1,linhaAtual-2);	
 		if(posicaoFutura.getLinha()>=1 && posicaoFutura.getColuna()<=8)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))
@@ -89,7 +90,7 @@ public class Cavalo  extends Peca implements Serializable{
 			}
 		}
 		
-		posicaoFutura = new Posicao(linhaAtual-1, colunaAtual+2);	
+		posicaoFutura = new Posicao(colunaAtual+2,linhaAtual-1);	
 		if(posicaoFutura.getLinha()>=1 && posicaoFutura.getColuna()<=8)	
 		{
 			if((tabuleiro.getCasa(posicaoFutura).getOcupada() == false) || ((tabuleiro.getCasa(posicaoFutura).getOcupada() == true) && (tabuleiro.getCasa(posicaoFutura).getCor() != this.getCor())))

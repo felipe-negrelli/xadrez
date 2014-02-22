@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.edu.ifes.poo1.xadrez.cgt.ControladorXadrez;
+import br.edu.ifes.poo1.xadrez.exceptions.PlayNotPossibleException;
 
 public class Partida implements Serializable{
 
@@ -20,6 +21,10 @@ public class Partida implements Serializable{
 	Jogador jogadorPreto ;
 	
 	Cor vezJogada;
+	public Cor getVezJogada() {
+		return vezJogada;
+	}
+
 	Cor ganhador;
 	
 	Date dataInicio;
@@ -92,59 +97,105 @@ public class Partida implements Serializable{
 		this.dataInicio = date;
 	}
 	
-	public void processarMovimento(Posicao posicaoOrigem, Posicao posicaoDestino)
+	public void setHoraFimAgora()
+	{
+		Date date = new Date();
+		this.dataFim = date;
+	}
+	
+	public boolean validarMovimentoSimples(Jogada jogada)
 	{
 		//testa se a posicao destino esta entre as possiveis		
-		List<Posicao> posicoesPossiveis = this.getTabuleiro().getCasa(posicaoOrigem).getPeca().getMovimentosPossiveis(this.tabuleiro);
+		List<Posicao> posicoesPossiveis = this.getTabuleiro().getCasa(jogada.getPosicaoOrigem()).getPeca().getMovimentosPossiveis(this.tabuleiro);
 		
-		if(existe(posicoesPossiveis, posicaoDestino))
+		if(existe(posicoesPossiveis, jogada.getPosicaoDestino()))
 		{
-			moverPeca(posicaoOrigem, posicaoDestino);			
+			return true;
 		}
 		else
 		{
-			this.controladorXadrez.setErroLogico();
+			return false;
 		}
 	}
 	
-	public void moverPeca(Posicao posicaoOrigem, Posicao posicaoDestino)
+	public boolean validarMovimentoCaptura(Jogada jogada)
+	{
+		//testa se a posicao destino esta entre as possiveis		
+		List<Posicao> posicoesPossiveis = this.getTabuleiro().getCasa(jogada.getPosicaoOrigem()).getPeca().getMovimentosPossiveis(this.tabuleiro);
+		
+		if(existe(posicoesPossiveis, jogada.getPosicaoDestino()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public void executarMovimentoSimples(Jogada jogada)
 	{
 		//move peca
-		PecaXadrez pecaOrigem = this.getTabuleiro().getCasa(posicaoOrigem).getPeca();
+		PecaXadrez pecaOrigem = this.getTabuleiro().getCasa(jogada.getPosicaoOrigem()).getPeca();
 		
-		//testa se existe um peça a ser comida na posicao destino e adiciona pontos
-		if(this.tabuleiro.getCasa(posicaoDestino).getOcupada())
-		{
-			adicionarPontos(this.tabuleiro.getCasa(posicaoDestino).getPeca());
-		}
-		
-		
-		
-		
-		
-		//////////////////////implementar en passant
-		
-		
-		
-		
-		
-		
-		//testa se é um peao e jogada Dupla e seta
-		if(pecaOrigem.getTipoPeca() == TipoPeca.Peao && !pecaOrigem.getMoveu() && posicaoDestino.getLinha() == posicaoOrigem.getLinha()+2)
-		{
-			//pecaOrigem.
-		}
-
 		//seta variavel peca no lugar de origem com a nova
-		this.tabuleiro.getCasa(posicaoDestino).setPeca(pecaOrigem);
-		pecaOrigem.incrementaMovimento();
-		
+		this.tabuleiro.getCasa(jogada.getPosicaoDestino()).setPeca(pecaOrigem);		
+		pecaOrigem.incrementaMovimento();		
 		ultimaPecaMovida = pecaOrigem;
 		
 		//limpa peca na origem
-		this.tabuleiro.getCasa(posicaoOrigem).limpaPeca();
+		this.tabuleiro.getCasa(jogada.getPosicaoOrigem()).limpaPeca();
 		
 		alterarVez();
+	}
+	
+	public void executarMovimentoCaptura(Jogada jogada) throws PlayNotPossibleException
+	{
+		
+		//move peca
+		PecaXadrez pecaOrigem = this.getTabuleiro().getCasa(jogada.getPosicaoOrigem()).getPeca();		
+		
+		//testa se existe um peça a ser comida na posicao destino e adiciona pontos
+		if(this.tabuleiro.getCasa(jogada.getPosicaoDestino()).getOcupada())
+		{
+			adicionarPontos(this.tabuleiro.getCasa(jogada.getPosicaoDestino()).getPeca());			
+			addListaCapituradas(jogada.getPosicaoDestino());
+			
+			//testa se esta comendo o rei
+			if(this.tabuleiro.getCasa(jogada.getPosicaoDestino()).getPeca().getTipoPeca() == TipoPeca.Rei)
+			{
+				this.estadoPartida = EstadoPartida.XequeMate;
+				this.ganhador = this.vezJogada;
+			}
+				
+			//seta variavel peca no lugar de origem com a nova
+			this.tabuleiro.getCasa(jogada.getPosicaoDestino()).setPeca(pecaOrigem);		
+			pecaOrigem.incrementaMovimento();		
+			ultimaPecaMovida = pecaOrigem;
+			
+			//limpa peca na origem
+			this.tabuleiro.getCasa(jogada.getPosicaoOrigem()).limpaPeca();
+			
+			alterarVez();
+		}
+		else
+		{
+			throw new PlayNotPossibleException();
+		}
+		
+	}
+	
+	private void addListaCapituradas(Posicao posicaoDestino)
+	{
+		//adiciona a peca comida na lista de capturadas do outro jogador
+		if(getJogadorDaVez().getCor() == Cor.Branco)
+		{
+			this.jogadorBranco.addPecaCapturada(this.getTabuleiro().getCasa(posicaoDestino).getPeca());
+		}
+		else
+		{
+			this.jogadorPreto.addPecaCapturada(this.getTabuleiro().getCasa(posicaoDestino).getPeca());
+		}
 	}
 	
 	public boolean existe(List<Posicao> posicoes, Posicao posicaoDestino)
@@ -172,50 +223,41 @@ public class Partida implements Serializable{
 		}
 	}
 	
-	@SuppressWarnings("incomplete-switch")
+	public void setGanhador(Cor corGanhador)
+	{
+		this.ganhador = corGanhador;
+
+	}
+	
+	public Jogador getGanhador()
+	{
+		switch (this.ganhador) {
+		case Branco:
+			return this.jogadorBranco;
+		default:
+			return this.jogadorPreto;
+		}
+	}
+	
+	public Jogador getPerdedor()
+	{
+		switch (this.ganhador) {
+		case Branco:
+			return this.jogadorPreto;
+		default:
+			return this.jogadorBranco;
+		}
+	}
+	
 	private void adicionarPontos(PecaXadrez pecaComida)
 	{
 		if(vezJogada == Cor.Branco)
 		{
-			switch(pecaComida.getTipoPeca())
-			{
-				case Peao:
-					jogadorBranco.adicionaPontos(1);
-					break;
-				case Bispo:
-					jogadorBranco.adicionaPontos(3);
-					break;
-				case Cavalo:
-					jogadorBranco.adicionaPontos(3);
-					break;
-				case Torre:
-					jogadorBranco.adicionaPontos(5);
-					break;
-				case Rainha:
-					jogadorBranco.adicionaPontos(9);
-					break;
-			}
+			jogadorBranco.adicionaPontos(pecaComida.getValorEmPontos());
 		}
 		else
 		{
-			switch(pecaComida.getTipoPeca())
-			{
-				case Peao:
-					jogadorPreto.adicionaPontos(1);
-					break;
-				case Bispo:
-					jogadorPreto.adicionaPontos(3);
-					break;
-				case Cavalo:
-					jogadorPreto.adicionaPontos(3);
-					break;
-				case Torre:
-					jogadorPreto.adicionaPontos(5);
-					break;
-				case Rainha:
-					jogadorPreto.adicionaPontos(9);
-					break;
-			}
+			jogadorPreto.adicionaPontos(pecaComida.getValorEmPontos());
 		}
 	}
 	
@@ -510,6 +552,25 @@ public class Partida implements Serializable{
 	public String toString()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		
+		if(this.estadoPartida == EstadoPartida.Desistencia || this.estadoPartida == EstadoPartida.Empate || this.estadoPartida == EstadoPartida.XequeMate)
+		{
+			String mensagem = "Inicio:"+dateFormat.format(this.dataInicio) + " - Fim:"+ dateFormat.format(this.dataFim) + " - Ganhador:";
+			
+			switch (this.ganhador) {
+			case Branco:
+				mensagem += this.getJogadorBranco().getNome();
+				break;
+			case Preto:
+				mensagem += this.getJogadorPreto().getNome();
+				break;				
+			default:
+				mensagem += "Empate";
+				break;
+			}			
+			
+			return mensagem;
+		}
 		
 		return dateFormat.format(this.dataInicio) + " - Branco: " + jogadorBranco.getNome()+ "(" + jogadorBranco.getPontos() +")"+
 											" Preto: " + jogadorPreto.getNome()+ "(" + jogadorPreto.getPontos() +")";

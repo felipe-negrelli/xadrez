@@ -11,6 +11,7 @@ public class Rainha  extends Peca implements Serializable{
 		super();
 		this.setTipoPeca(TipoPeca.Rainha);
 		this.setCor(cor);
+		this.setValorEmPontos(9);
 	}
 
 	public List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro) {
@@ -24,7 +25,7 @@ public class Rainha  extends Peca implements Serializable{
 		//testa as posições a frente em relação ao branco e atras em relacao ao preto
 		for(int contador=linhaAtual+1;contador<=8;contador++)
 		{
-			Posicao posicaoAtual = new Posicao(contador, colunaAtual);			
+			Posicao posicaoAtual = new Posicao(colunaAtual,contador);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -45,7 +46,7 @@ public class Rainha  extends Peca implements Serializable{
 		//testa as posições a atras em relação ao branco e a frente em relacao ao preto
 		for(int contador=linhaAtual-1;contador>=1;contador--)
 		{
-			Posicao posicaoAtual = new Posicao(contador, colunaAtual);			
+			Posicao posicaoAtual = new Posicao(colunaAtual,contador);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -66,7 +67,7 @@ public class Rainha  extends Peca implements Serializable{
 		//testa as posições a esquerda em relação ao branco e a direita em relacao ao preto
 		for(int contador=colunaAtual-1;contador>=1;contador--)
 		{
-			Posicao posicaoAtual = new Posicao(linhaAtual, contador);			
+			Posicao posicaoAtual = new Posicao(contador,linhaAtual);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -87,7 +88,7 @@ public class Rainha  extends Peca implements Serializable{
 		//testa as posições a direita em relação ao branco e a esquerda em relacao ao preto
 		for(int contador=colunaAtual+1;contador<=8;contador++)
 		{
-			Posicao posicaoAtual = new Posicao(linhaAtual, contador);			
+			Posicao posicaoAtual = new Posicao(contador,linhaAtual);			
 			if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 			{
 				//adiciona a lista de destinos
@@ -112,7 +113,7 @@ public class Rainha  extends Peca implements Serializable{
 				int contadorColuna = colunaAtual+1;
 				for(int contadorLinha=linhaAtual+1;contadorLinha<=8 && contadorColuna<=8;contadorLinha++)
 				{
-					Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+					Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 					if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 					{
 						//adiciona a lista de destinos
@@ -135,7 +136,7 @@ public class Rainha  extends Peca implements Serializable{
 				contadorColuna = colunaAtual+1;
 				for(int contadorLinha=linhaAtual-1;contadorLinha>=1 && contadorColuna<=8;contadorLinha--)
 				{
-					Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+					Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 					if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 					{
 						//adiciona a lista de destinos
@@ -158,7 +159,7 @@ public class Rainha  extends Peca implements Serializable{
 				contadorColuna = colunaAtual-1;
 				for(int contadorLinha=linhaAtual-1;contadorLinha>=1 && contadorColuna>=1;contadorLinha--)
 				{
-					Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+					Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 					if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 					{
 						//adiciona a lista de destinos
@@ -181,7 +182,7 @@ public class Rainha  extends Peca implements Serializable{
 				contadorColuna = colunaAtual-1;
 				for(int contadorLinha=linhaAtual+1;contadorLinha<=8 && contadorColuna>=1;contadorLinha++)
 				{
-					Posicao posicaoAtual = new Posicao(contadorLinha, contadorColuna);			
+					Posicao posicaoAtual = new Posicao(contadorColuna,contadorLinha);			
 					if(tabuleiro.getCasa(posicaoAtual).getOcupada() == false)
 					{
 						//adiciona a lista de destinos

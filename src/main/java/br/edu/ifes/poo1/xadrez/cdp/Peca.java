@@ -3,7 +3,7 @@ package br.edu.ifes.poo1.xadrez.cdp;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class Peca implements PecaXadrez,Serializable {
+public abstract class Peca implements PecaXadrez,Serializable,Comparable<Peca> {
 	
 	private static final long serialVersionUID = -2043646471672017146L;
 	private Cor cor;
@@ -11,7 +11,21 @@ public abstract class Peca implements PecaXadrez,Serializable {
 	private boolean movimentoDuplo = false;
 	private TipoPeca tipoPeca;
 	private Posicao posicao;
+	private int valorEmPontos;
 	
+	public Peca()
+	{
+		
+	}
+	
+	public int getValorEmPontos() {
+		return valorEmPontos;
+	}
+
+	public void setValorEmPontos(int valorEmPontos) {
+		this.valorEmPontos = valorEmPontos;
+	}
+
 	public Posicao getPosicao() {
 		return posicao;
 	}
@@ -66,5 +80,10 @@ public abstract class Peca implements PecaXadrez,Serializable {
 	}
 	
 	public abstract List<Posicao> getMovimentosPossiveis(Tabuleiro tabuleiro);
+	
+	public int compareTo(Peca peca)
+	{
+		return (""+valorEmPontos).compareTo((peca.getValorEmPontos()+""));
+	}
 
 }
