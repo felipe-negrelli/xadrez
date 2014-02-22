@@ -1,0 +1,10 @@
+Objetivo:
+  - O jogo de Xadrez deverá permitir 2 jogadores.
+  extra: Implementar jogo contra o computador
+
+
+
+enPassant
+
+RoqueM
+
