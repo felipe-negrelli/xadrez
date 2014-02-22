@@ -13,31 +13,28 @@ public class Partida implements Serializable{
 
 	private static final long serialVersionUID = 3541436818761632524L;
 	ControladorXadrez controladorXadrez;
-	Tabuleiro tabuleiro = new Tabuleiro();
-	
-	EstadoPartida estadoPartida;
-	
+	Tabuleiro tabuleiro = new Tabuleiro();	
+	EstadoPartida estadoPartida;	
 	Jogador jogadorBranco;
 	Jogador jogadorPreto ;
-	
-	Cor vezJogada;
-	public Cor getVezJogada() {
-		return vezJogada;
-	}
-
-	Cor ganhador;
-	
+	Cor ganhador;	
 	Date dataInicio;
-	Date dataFim;
-	
+	Date dataFim;	
 	PecaXadrez ultimaPecaMovida;
 	
 	public Partida(ControladorXadrez controlador)
 	{
 		this.controladorXadrez = controlador;
+		this.tabuleiro.criaTabuleiro();
 		this.estadoPartida = EstadoPartida.Normal;
 		vezJogada = Cor.Branco;
 	}
+	
+	
+	Cor vezJogada;
+	public Cor getVezJogada() {
+		return vezJogada;
+	}	
 	
 	public Jogador getJogadorBranco() {
 		return jogadorBranco;
@@ -271,19 +268,19 @@ public class Partida implements Serializable{
 		
 		if(getJogadorDaVez().getCor() == Cor.Branco)
 		{
-			posicaoReiAntiga = new Posicao(1,5);
-			posicaoReiFutura = new Posicao(1,7);
+			posicaoReiAntiga = new Posicao(5,1);
+			posicaoReiFutura = new Posicao(7,1);
 			
-			posicaoTorreAntiga = new Posicao(1,8);
-			posicaoTorreFutura = new Posicao(1,6);			
+			posicaoTorreAntiga = new Posicao(8,1);
+			posicaoTorreFutura = new Posicao(6,1);			
 		}
 		else
 		{
-			posicaoReiAntiga = new Posicao(8,5);
-			posicaoReiFutura = new Posicao(8,7);
+			posicaoReiAntiga = new Posicao(5,8);
+			posicaoReiFutura = new Posicao(7,8);
 			
 			posicaoTorreAntiga = new Posicao(8,8);
-			posicaoTorreFutura = new Posicao(8,6);			
+			posicaoTorreFutura = new Posicao(6,8);			
 		}		
 		
 		//Pega as peças das casas
@@ -318,19 +315,19 @@ public class Partida implements Serializable{
 		
 		if(getJogadorDaVez().getCor() == Cor.Branco)
 		{
-			posicaoReiAntiga = new Posicao(1,5);
-			posicaoReiFutura = new Posicao(1,3);
+			posicaoReiAntiga = new Posicao(5,1);
+			posicaoReiFutura = new Posicao(3,1);
 			
 			posicaoTorreAntiga = new Posicao(1,1);
-			posicaoTorreFutura = new Posicao(1,4);			
+			posicaoTorreFutura = new Posicao(4,1);			
 		}
 		else
 		{
-			posicaoReiAntiga = new Posicao(8,5);
-			posicaoReiFutura = new Posicao(8,3);
+			posicaoReiAntiga = new Posicao(5,8);
+			posicaoReiFutura = new Posicao(3,8);
 			
-			posicaoTorreAntiga = new Posicao(8,1);
-			posicaoTorreFutura = new Posicao(8,4);			
+			posicaoTorreAntiga = new Posicao(1,8);
+			posicaoTorreFutura = new Posicao(4,8);			
 		}		
 		
 		//Pega as peças das casas
@@ -366,7 +363,7 @@ public class Partida implements Serializable{
 		
 		if(getJogadorDaVez().getCor() == Cor.Branco)
 		{
-			Posicao posicaoRei = new Posicao(1,5);
+			Posicao posicaoRei = new Posicao(5,1);
 			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
@@ -375,21 +372,21 @@ public class Partida implements Serializable{
 			}
 			
 			
-			Posicao posicaoCasaVaziaEsquerda = new Posicao(1,6);
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(6,1);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
 			{
 				casaVaziaEsquerdaOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaDireita = new Posicao(1,7);
+			Posicao posicaoCasaVaziaDireita = new Posicao(7,1);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
 				casaVaziaDireitaOK = true;
 		
 			}
 			
-			Posicao posicaoTorre = new Posicao(1,8);
+			Posicao posicaoTorre = new Posicao(8,1);
 			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
@@ -405,7 +402,7 @@ public class Partida implements Serializable{
 		}
 		else
 		{
-			Posicao posicaoRei = new Posicao(8,5);
+			Posicao posicaoRei = new Posicao(5,8);
 			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
@@ -414,14 +411,14 @@ public class Partida implements Serializable{
 			}
 			
 			
-			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,6);
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(6,8);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
 			{
 				casaVaziaEsquerdaOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaDireita = new Posicao(8,7);
+			Posicao posicaoCasaVaziaDireita = new Posicao(7,8);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
 				casaVaziaDireitaOK = true;
@@ -465,28 +462,28 @@ public class Partida implements Serializable{
 			}
 			
 			
-			Posicao posicaoCasaVaziaEsquerda = new Posicao(1,2);
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(2,1);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
 			{
 				casaVaziaEsquerdaOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaMeio = new Posicao(1,3);
+			Posicao posicaoCasaVaziaMeio = new Posicao(3,1);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaMeio).getOcupada() == false)
 			{
 				casaVaziaMeioOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaDireita = new Posicao(1,4);
+			Posicao posicaoCasaVaziaDireita = new Posicao(4,1);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
 				casaVaziaDireitaOK = true;
 		
 			}
 			
-			Posicao posicaoRei = new Posicao(1,5);
+			Posicao posicaoRei = new Posicao(5,1);
 			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
@@ -502,7 +499,7 @@ public class Partida implements Serializable{
 		}
 		else
 		{
-			Posicao posicaoRei = new Posicao(8,5);
+			Posicao posicaoRei = new Posicao(5,8);
 			if(this.tabuleiro.getCasa(posicaoRei).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getTipoPeca() == TipoPeca.Rei
 					&& this.tabuleiro.getCasa(posicaoRei).getPeca().getMoveu() == false)
@@ -511,28 +508,28 @@ public class Partida implements Serializable{
 			}
 			
 			
-			Posicao posicaoCasaVaziaEsquerda = new Posicao(8,2);
+			Posicao posicaoCasaVaziaEsquerda = new Posicao(2,8);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaEsquerda).getOcupada() == false)
 			{
 				casaVaziaEsquerdaOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaMeio = new Posicao(8,3);
+			Posicao posicaoCasaVaziaMeio = new Posicao(3,8);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaMeio).getOcupada() == false)
 			{
 				casaVaziaMeioOK = true;
 		
 			}
 			
-			Posicao posicaoCasaVaziaDireita = new Posicao(8,4);
+			Posicao posicaoCasaVaziaDireita = new Posicao(4,8);
 			if(this.tabuleiro.getCasa(posicaoCasaVaziaDireita).getOcupada() == false)
 			{
 				casaVaziaDireitaOK = true;
 		
 			}
 			
-			Posicao posicaoTorre = new Posicao(8,1);
+			Posicao posicaoTorre = new Posicao(1,8);
 			if(this.tabuleiro.getCasa(posicaoTorre).getOcupada() 
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getTipoPeca() == TipoPeca.Torre
 					&& this.tabuleiro.getCasa(posicaoTorre).getPeca().getMoveu() == false)
@@ -556,18 +553,25 @@ public class Partida implements Serializable{
 		if(this.estadoPartida == EstadoPartida.Desistencia || this.estadoPartida == EstadoPartida.Empate || this.estadoPartida == EstadoPartida.XequeMate)
 		{
 			String mensagem = "Inicio:"+dateFormat.format(this.dataInicio) + " - Fim:"+ dateFormat.format(this.dataFim) + " - Ganhador:";
-			
-			switch (this.ganhador) {
-			case Branco:
-				mensagem += this.getJogadorBranco().getNome();
-				break;
-			case Preto:
-				mensagem += this.getJogadorPreto().getNome();
-				break;				
-			default:
+			if(this.estadoPartida != EstadoPartida.Empate)
+			{
+				switch (this.ganhador) {
+				case Branco:
+					mensagem += this.getJogadorBranco().getNome();
+					break;
+				case Preto:
+					mensagem += this.getJogadorPreto().getNome();
+					break;				
+				default:
+					
+					break;
+				}	
+			}
+			else
+			{
 				mensagem += "Empate";
-				break;
-			}			
+			}
+			
 			
 			return mensagem;
 		}

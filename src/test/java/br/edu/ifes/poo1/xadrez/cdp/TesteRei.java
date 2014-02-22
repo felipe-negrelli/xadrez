@@ -7,9 +7,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TesteBispo {
+public class TesteRei {
 	private Tabuleiro tabuleiro;
-	private Bispo bispo;	
+	private Rei rei;	
 	
 	@Before
 	public void before(){
@@ -17,10 +17,10 @@ public class TesteBispo {
 		tabuleiro = new Tabuleiro();
 
 		// Inicia o bispo.
-		bispo = new Bispo(Cor.Branco);
+		rei = new Rei(Cor.Branco);
 
 		// Coloca peças inimigas no tabuleiro.
-		tabuleiro.getCasa(new Posicao(4, 4)).setPeca(bispo);
+		tabuleiro.getCasa(new Posicao(4, 4)).setPeca(rei);
 		tabuleiro.getCasa(new Posicao(6, 4)).setPeca(new Peao(Cor.Preto));
 		tabuleiro.getCasa(new Posicao(8, 8)).setPeca(new Peao(Cor.Preto));
 		tabuleiro.getCasa(new Posicao(1, 1)).setPeca(new Peao(Cor.Preto));
@@ -30,21 +30,16 @@ public class TesteBispo {
 	@Test
 	public void podeMovimentar() {
 		
-		List<Posicao> lista = this.bispo.getMovimentosPossiveis(this.tabuleiro);
+		List<Posicao> lista = this.rei.getMovimentosPossiveis(this.tabuleiro);
 		
-		Assert.assertTrue(existe(lista,new Posicao(1,1)));
-		Assert.assertTrue(existe(lista,new Posicao(2,2)));
-		Assert.assertTrue(existe(lista,new Posicao(3,3)));
-		Assert.assertTrue(existe(lista,new Posicao(5,5)));
-		Assert.assertTrue(existe(lista,new Posicao(6,6)));
-		Assert.assertTrue(existe(lista,new Posicao(7,7)));
-		Assert.assertTrue(existe(lista,new Posicao(8,8)));		
-		Assert.assertTrue(existe(lista,new Posicao(1,7)));
-		Assert.assertTrue(existe(lista,new Posicao(2,6)));
 		Assert.assertTrue(existe(lista,new Posicao(3,5)));
+		Assert.assertTrue(existe(lista,new Posicao(4,5)));
+		Assert.assertTrue(existe(lista,new Posicao(5,5)));
+		Assert.assertTrue(existe(lista,new Posicao(5,4)));
 		Assert.assertTrue(existe(lista,new Posicao(5,3)));
-		Assert.assertTrue(existe(lista,new Posicao(6,2)));
-		Assert.assertTrue(existe(lista,new Posicao(7,1)));
+		Assert.assertTrue(existe(lista,new Posicao(4,3)));
+		Assert.assertTrue(existe(lista,new Posicao(3,3)));		
+		Assert.assertTrue(existe(lista,new Posicao(3,4)));
 	
 	}
 	

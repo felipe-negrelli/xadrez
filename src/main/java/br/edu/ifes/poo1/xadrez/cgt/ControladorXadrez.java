@@ -120,6 +120,12 @@ public class ControladorXadrez implements Serializable {
 		}
 	}
 	
+	public void empatar()
+	{
+		this.partidaAtual.setEstadoPartida(EstadoPartida.Empate);
+		this.partidaAtual.setHoraFimAgora();
+	}
+	
 	public void processarJogada(Jogada jogada) throws SmallRockNotPossibleException, BigRockNotPossibleException, PlayNotPossibleException
 	{		
 		if(jogada.getTipoJogada() == TipoJogada.Movimento || jogada.getTipoJogada() == TipoJogada.MovimentoXeque || jogada.getTipoJogada() == TipoJogada.MovimentoXequeMate)
@@ -171,9 +177,7 @@ public class ControladorXadrez implements Serializable {
 			if(partidaAtual.getTabuleiro().getCasa(posicaoAtual).getOcupada())
 			{
 				//teste se peca de origem é do jogador e se a posicao na destino esta ocupada e se a peca e do outro
-				if(partidaAtual.getTabuleiro().getCasa(posicaoAtual).getCor() == getJodadorDaVez().getCor() && 
-				   partidaAtual.getTabuleiro().getCasa(posicaoDestino).getOcupada() &&
-				   partidaAtual.getTabuleiro().getCasa(posicaoDestino).getCor() != this.partidaAtual.getVezJogada())
+				if(partidaAtual.getTabuleiro().getCasa(posicaoAtual).getCor() == getJodadorDaVez().getCor() && partidaAtual.getTabuleiro().getCasa(posicaoDestino).getOcupada() && partidaAtual.getTabuleiro().getCasa(posicaoDestino).getCor() != this.partidaAtual.getVezJogada())	
 				{
 					this.partidaAtual.validarMovimentoCaptura(jogada);
 					this.partidaAtual.executarMovimentoCaptura(jogada);
@@ -192,6 +196,10 @@ public class ControladorXadrez implements Serializable {
 						this.partidaAtual.setGanhador(this.partidaAtual.getVezJogada());
 						this.partidaAtual.setHoraFimAgora();
 					}
+				}
+				else
+				{
+					throw new PlayNotPossibleException();
 				}
 			}
 			else

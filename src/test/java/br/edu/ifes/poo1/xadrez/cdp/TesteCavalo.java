@@ -1,9 +1,12 @@
 package br.edu.ifes.poo1.xadrez.cdp;
 
 import java.util.List;
+
 import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import br.edu.ifes.poo1.xadrez.cdp.Cavalo;
 
 public class TesteCavalo {
@@ -32,15 +35,28 @@ public class TesteCavalo {
 		
 		List<Posicao> lista = this.cavalo.getMovimentosPossiveis(this.tabuleiro);
 		
-		Assert.assertTrue(lista.contains(new Posicao(3,6)));
-		Assert.assertTrue(lista.contains(new Posicao(4,7)));
-		Assert.assertTrue(lista.contains(new Posicao(6,7)));
-		Assert.assertTrue(lista.contains(new Posicao(7,6)));
-		Assert.assertTrue(lista.contains(new Posicao(7,4)));
-		Assert.assertTrue(lista.contains(new Posicao(6,3)));
-		Assert.assertTrue(lista.contains(new Posicao(4,3)));
-		Assert.assertTrue(lista.contains(new Posicao(3,4)));
+		Assert.assertTrue(existe(lista,new Posicao(2,5)));
+		Assert.assertTrue(existe(lista,new Posicao(3,6)));
+		Assert.assertTrue(existe(lista,new Posicao(5,6)));
+		Assert.assertTrue(existe(lista,new Posicao(6,5)));		
+		Assert.assertTrue(existe(lista,new Posicao(6,3)));
+		Assert.assertTrue(existe(lista,new Posicao(5,2)));
+		Assert.assertTrue(existe(lista,new Posicao(3,2)));
+		Assert.assertTrue(existe(lista,new Posicao(2,3)));
 	
+	}
+	
+	public boolean existe(List<Posicao> posicoes, Posicao posicaoDestino)
+	{
+		boolean achou = false;
+		for(int contador=0;contador<posicoes.size();contador++)
+		{
+			if(posicoes.get(contador).getLinha()==posicaoDestino.getLinha() && (posicoes.get(contador).getColuna()==posicaoDestino.getColuna()))
+			{
+				achou = true;
+			}
+		}
+		return achou;
 	}
 
 }

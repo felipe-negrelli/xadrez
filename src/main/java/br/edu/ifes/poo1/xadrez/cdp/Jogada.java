@@ -9,6 +9,20 @@ public class Jogada {
 	private boolean jogadaValida;
 	
 	
+	public Jogada(Posicao origem, Posicao destino, TipoJogada tipoJogada)
+	{
+		super();
+		this.posicaoOrigem = origem;
+		this.posicaoDestino = destino;
+		this.tipoJogada = tipoJogada;
+	}
+	
+	public Jogada(TipoJogada tipoJogada)
+	{
+		super();
+		this.tipoJogada = tipoJogada;
+	}
+	
 	
 	public TipoPeca getTipoPecaPromocao() {
 		return tipoPecaPromocao;
@@ -26,12 +40,7 @@ public class Jogada {
 		this.jogadaValida = jogadaValida;
 	}
 	
-	public Jogada(Posicao origem, Posicao destino, TipoJogada tipoJogada)
-	{
-		this.posicaoOrigem = origem;
-		this.posicaoDestino = destino;
-		this.tipoJogada = tipoJogada;
-	}
+	
 
 	public Posicao getPosicaoOrigem() {
 		return posicaoOrigem;

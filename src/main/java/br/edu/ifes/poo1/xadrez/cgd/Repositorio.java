@@ -11,14 +11,14 @@ import br.edu.ifes.poo1.xadrez.cdp.*;;
 
 public class Repositorio {
 	
-	public static void salvarDados(List<Partida> listaPartidas) throws Exception
+	public static <T> void salvarDados(List<T> t) throws Exception
 	{
-		String path = new File("").getAbsolutePath() + File.separator + "partidas.dat";
+		String path = new File("").getAbsolutePath() + File.separator + "dados.dat";
 		ObjectOutputStream out = null;
 		try
 		{
 			out = new ObjectOutputStream(new FileOutputStream(path));			
-			out.writeObject(listaPartidas);
+			out.writeObject(t);
 		}
 		finally
 		{
@@ -27,15 +27,15 @@ public class Repositorio {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Partida> lerDados() throws Exception
+	public static <T> List<T> lerDados() throws Exception
 	{
-		String path = new File("").getAbsolutePath() + File.separator + "partidas.dat";
+		String path = new File("").getAbsolutePath() + File.separator + "dados.dat";
 		ObjectInputStream in = null;		
 		try
 		{
 			in = new ObjectInputStream(new FileInputStream(path));
-			List<Partida> partidas = (List<Partida>)in.readObject();	
-			return partidas;
+			List<T> dados = (List<T>)in.readObject();	
+			return dados;
 		}
 		finally
 		{

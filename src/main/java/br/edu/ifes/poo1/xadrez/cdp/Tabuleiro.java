@@ -11,7 +11,6 @@ public class Tabuleiro implements Serializable{
 	public Tabuleiro()
 	{
 		inicializaTabuleiro();
-		criaTabuleiro();
 	}
 	
 	public void inicializaTabuleiro()

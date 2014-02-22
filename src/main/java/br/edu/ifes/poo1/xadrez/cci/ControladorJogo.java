@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import br.edu.ifes.poo1.xadrez.cdp.Comando;
 import br.edu.ifes.poo1.xadrez.cdp.Cor;
 import br.edu.ifes.poo1.xadrez.cdp.EstadoPartida;
 import br.edu.ifes.poo1.xadrez.cdp.Jogada;
@@ -29,8 +30,6 @@ public class ControladorJogo implements Serializable {
 	
 	public void iniciar()
 	{
-		String jogada = "11=D";
-		char letraPeca = jogada.charAt(3);
 		try
 		{
 			controladorXadrez.lerPartidasSalvas();
@@ -218,6 +217,11 @@ public class ControladorJogo implements Serializable {
 			this.controladorXadrez.desistir();
 		}
 		
+		if(comando.getTipoComando() == TipoComando.Empate)
+		{
+			this.controladorXadrez.empatar();
+		}
+		
 		else if(comando.getTipoComando() == TipoComando.Sair)
 		{
 			try
@@ -241,6 +245,8 @@ public class ControladorJogo implements Serializable {
 			try
 			{
 				this.controladorXadrez.salvarPartidas();
+				this.telaTexto.exibirMensagem("Jogo salvo com sucesso!\n\n");
+				
 			}
 			catch(Exception ex)
 			{
@@ -301,15 +307,23 @@ public class ControladorJogo implements Serializable {
 				comandoAtual.setComandoValido(true);
 			}
 			
+			else if(jogada.equals("salvar"))
+			{
+				comandoAtual.setTipoComando(TipoComando.Salvar);
+				comandoAtual.setComandoValido(true);
+			}
+			
 			else if(jogada.equals("o-o-o"))
 			{
-				comandoAtual.setTipoComando(TipoComando.RoqueGrande);
+				comandoAtual.setTipoComando(TipoComando.Jogada);
+				comandoAtual.setJogada(new Jogada(TipoJogada.RoqueGrande));
 				comandoAtual.setComandoValido(true);
 			}
 			
 			else if(jogada.equals("o-o"))
 			{
-				comandoAtual.setTipoComando(TipoComando.RoquePequeno);
+				comandoAtual.setTipoComando(TipoComando.Jogada);
+				comandoAtual.setJogada(new Jogada(TipoJogada.RoquePequeno));
 				comandoAtual.setComandoValido(true);
 			}
 			
@@ -573,6 +587,10 @@ public class ControladorJogo implements Serializable {
 			
 			mensagem += "\n";
 			this.telaTexto.exibirMensagem(mensagem);		
-		}		
+		}
+		else
+		{
+			this.telaTexto.exibirMensagem("Não existe nenhuma partida finalizada no momento.\n\n");	
+		}
 	}	
 }
